@@ -18,11 +18,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     encrypter.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    question.cpp \
+    reponse.cpp
 
 HEADERS += \
     encrypter.h \
-    mainwindow.h
+    mainwindow.h \
+    question.h \
+    reponse.h
 
 FORMS += \
     mainwindow.ui
