@@ -24,6 +24,7 @@ SOURCES += \
 
 HEADERS += \
     encrypter.h \
+    json.hpp \
     mainwindow.h \
     question.h \
     reponse.h
