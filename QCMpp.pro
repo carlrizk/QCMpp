@@ -21,7 +21,7 @@ SOURCES += \
     encrypter.cpp \
     main.cpp \
     mainwindow.cpp \
-    question.cpp
+    question.cpp \
     student.cpp \
     user.cpp
 
@@ -31,7 +31,7 @@ HEADERS += \
     encrypter.h \
     json.hpp \
     mainwindow.h \
-    question.h
+    question.h \
     student.h \
     user.h
 
