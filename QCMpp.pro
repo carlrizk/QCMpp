@@ -20,13 +20,15 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     question.cpp \
-    reponse.cpp
+    reponse.cpp \
+    user.cpp
 
 HEADERS += \
     encrypter.h \
     mainwindow.h \
     question.h \
-    reponse.h
+    reponse.h \
+    user.h
 
 FORMS += \
     mainwindow.ui
