@@ -21,7 +21,6 @@ void Question::add_tofile(ofstream & myfile)const{
     for(auto c : choix)
         c.add_tofile(myfile);
     myfile << "\n";
-    return myfile;
 }
 
 
