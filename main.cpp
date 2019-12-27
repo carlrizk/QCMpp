@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
     q1.add_choice(r2);
     q1.add_choice(r3);
 
+    Reponse r5;
 
 
     return 0;
