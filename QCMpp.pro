@@ -30,6 +30,7 @@ HEADERS += \
     admin.h \
     answer.h \
     encrypter.h \
+    json.hpp \
     mainwindow.h \
     question.h
     student.h \
