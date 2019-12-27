@@ -19,7 +19,7 @@ public:
     //Vector could contain 0s and 1s, treated as bool
 
 private:
-    std::string text;
+    const std::string text;
     std::vector<std::unique_ptr<const Answer>> choices;
 };
 }

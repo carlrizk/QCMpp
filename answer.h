@@ -12,8 +12,8 @@ public:
     bool isCorrect() const;
 
 private:
-    std::string text;
-    bool correct;
+    const std::string text;
+    const bool correct;
 };
 }
 #endif // Answer_H
