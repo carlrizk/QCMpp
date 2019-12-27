@@ -16,7 +16,7 @@ bool Question::correct(const std::vector<bool> u_reponses) const{
     return isCorrect;
 }
 
-ofstream &Question::add_tofile(ofstream & myfile)const{
+void Question::add_tofile(ofstream & myfile)const{
     myfile << texte << "\n";
     for(auto c : choix)
         c.add_tofile(myfile);

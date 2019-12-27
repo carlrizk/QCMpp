@@ -19,8 +19,8 @@ public:
     //Checks if user's choices are correct
     //Vector could contain 0s and 1s, treated as bool
 
-    std::ofstream &add_tofile(std::ofstream & myfile)const;
-    //Writes question and its answers to a opened file
+    void add_tofile(std::ofstream & myfile)const;
+    //Writes question and its answers to an opened file
 
 private:
     std::string texte;
