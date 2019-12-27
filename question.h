@@ -2,6 +2,7 @@
 #define QUESTION_H
 #include "answer.h"
 #include <vector>
+#include <memory>
 
 namespace QCMpp{
 class Question
