@@ -16,17 +16,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    answer.cpp \
     encrypter.cpp \
     main.cpp \
     mainwindow.cpp \
-    question.cpp \
-    reponse.cpp
+    question.cpp
 
 HEADERS += \
+    answer.h \
     encrypter.h \
     mainwindow.h \
-    question.h \
-    reponse.h
+    question.h
 
 FORMS += \
     mainwindow.ui

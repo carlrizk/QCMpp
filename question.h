@@ -1,30 +1,26 @@
 #ifndef QUESTION_H
 #define QUESTION_H
-#include "reponse.h"
+#include "answer.h"
 #include <vector>
 
 namespace QCMpp{
 class Question
 {
 public:
-    Question() = delete;
     Question(const Question& q) = delete;
 
-    Question(const std::string& texte);
+    Question(const std::string& text);
     //arbitrary number of choices
 
-    void add_choice(const Reponse & r);
+    void add_choice(const Answer & a);
 
-    bool correct(const std::vector<bool> u_reponses) const;
+    bool correct(const std::vector<bool> u_Answers) const;
     //Checks if user's choices are correct
     //Vector could contain 0s and 1s, treated as bool
 
-    void add_tofile(std::ofstream & myfile)const;
-    //Writes question and its answers to an opened file
-
 private:
-    std::string texte;
-    std::vector<Reponse> choix;
+    const std::string text;
+    std::vector<std::unique_ptr<const Answer>> choices;
 };
 }
 #endif // QUESTION_H

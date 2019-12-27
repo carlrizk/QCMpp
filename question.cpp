@@ -3,25 +3,18 @@
 using namespace std;
 
 namespace QCMpp{
-Question::Question(const string &texte) : texte(texte){}
 
-void Question::add_choice(const Reponse& r){choix.push_back(r);}
+Question::Question(const string &text) : text(text){}
 
-bool Question::correct(const std::vector<bool> u_reponses) const{
+void Question::add_choice(const Answer& a){choices.push_back(unique_ptr<const Answer>(new Answer(a)));}
+
+bool Question::correct(const std::vector<bool> u_Answers) const{
     bool isCorrect = true;
-    for(size_t i(0);i<choix.size() && isCorrect; ++i){
-        if(u_reponses[i] != choix[i].isCorrect())
+    for(size_t i(0);i<choices.size() && isCorrect; ++i){
+        if(u_Answers[i] != choices[i]->isCorrect())
             isCorrect = false;
     }
     return isCorrect;
 }
-
-void Question::add_tofile(ofstream & myfile)const{
-    myfile << texte << "\n";
-    for(auto c : choix)
-        c.add_tofile(myfile);
-    myfile << "\n";
-}
-
 
 }
