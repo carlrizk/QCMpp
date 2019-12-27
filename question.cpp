@@ -6,7 +6,7 @@ namespace QCMpp{
 
 Question::Question(const string &text) : text(text){}
 
-void Question::add_choice(const Answer& a){choices.push_back(unique_ptr<const Answer>(&a));}
+void Question::add_choice(const Answer& a){choices.push_back(unique_ptr<const Answer>(new Answer(a)));}
 
 bool Question::correct(const std::vector<bool> u_Answers) const{
     bool isCorrect = true;
