@@ -3,7 +3,7 @@ Quesiton Class
 
 ### Constructor:
 ```cpp
-Question(const std::string& texte);
+Question(const std::string& text);
 ```
 
 ### Methods:
