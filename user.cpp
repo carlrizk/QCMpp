@@ -2,21 +2,18 @@
 
 namespace QCMpp {
 
-User::User(const std::string &username, bool admin): username(username), admin(admin){}
+User::User(const std::string &username, const std::string & password): username(username),password(password){}
 
-bool User::isAdmin() const
-{
-    return admin;
-}
-
-void User::setAdmin(bool admin)
-{
-    this->admin = admin;
-}
+User::~User(){}
 
 std::string User::getUsername() const
 {
     return username;
+}
+
+bool User::matchPassword(const std::string &pass)
+{
+    return pass == password;
 }
 
 }
