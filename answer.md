@@ -3,7 +3,7 @@ Answer class
 
 ### Constructor:
 ``` cpp
-Answer(const std::string & texte, const bool correct);
+Answer(const std::string & text, const bool correct);
 ```
 
 ### Methods:
