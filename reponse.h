@@ -1,6 +1,7 @@
 #ifndef REPONSE_H
 #define REPONSE_H
 #include <string>
+#include <fstream>
 
 namespace QCMpp{
 class Reponse
@@ -12,11 +13,11 @@ public:
 
     bool isCorrect() const;
 
-    std::string afficher() const;
+    void add_tofile(std::ofstream& myfile) const;
 
 private:
     std::string texte;
-    const bool correct;
+    bool correct;
 };
 }
 #endif // REPONSE_H
