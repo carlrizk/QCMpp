@@ -9,18 +9,18 @@ class Question
 public:
     Question(const Question& q) = delete;
 
-    Question(const std::string& texte);
+    Question(const std::string& text);
     //arbitrary number of choices
 
-    void add_choice(const Answer & r);
+    void add_choice(const Answer & a);
 
     bool correct(const std::vector<bool> u_Answers) const;
     //Checks if user's choices are correct
     //Vector could contain 0s and 1s, treated as bool
 
 private:
-    std::string texte;
-    std::vector<Answer> choix;
+    std::string text;
+    std::vector<std::unique_ptr<const Answer>> choices;
 };
 }
 #endif // QUESTION_H

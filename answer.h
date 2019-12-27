@@ -1,7 +1,6 @@
 #ifndef Answer_H
 #define Answer_H
 #include <string>
-#include <fstream>
 
 namespace QCMpp{
 class Answer

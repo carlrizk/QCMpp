@@ -1,15 +1,10 @@
 #include "mainwindow.h"
 
 #include <QApplication>
-#include "reponse.h"
-#include "question.h"
-#include <string>
-#include <fstream>
-#include <iostream>
-using namespace QCMpp;
 
 int main(int argc, char *argv[])
 {
+<<<<<<< HEAD
 //    QApplication a(argc, argv);
 //    MainWindow w;
 //    w.show();
@@ -25,7 +20,14 @@ int main(int argc, char *argv[])
 
     Reponse r5;
 
+=======
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
+>>>>>>> upstream/master
 
+    
     return 0;
 
 }
