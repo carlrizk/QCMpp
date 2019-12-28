@@ -8,10 +8,9 @@ namespace QCMpp{
 class Question
 {
 public:
-    Question(const Question& q);
-
     Question(const std::string& text);
-    //arbitrary number of choices
+
+    Question(const Question& q);
 
     void add_answer(const Answer & a);
 

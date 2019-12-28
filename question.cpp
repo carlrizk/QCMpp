@@ -4,12 +4,12 @@ using namespace std;
 
 namespace QCMpp{
 
+Question::Question(const string &text) : text(text){}
+
 Question::Question(const Question &q) : text(q.text){
     for(auto& a : q.answers)
         add_answer(*a);
 }
-
-Question::Question(const string &text) : text(text){}
 
 void Question::add_answer(const Answer& a){answers.push_back(unique_ptr<const Answer>(new Answer(a)));}
 
