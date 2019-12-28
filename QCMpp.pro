@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     answer.cpp \
+    application.cpp \
     encrypter.cpp \
     main.cpp \
     mcq.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     answer.h \
+    application.h \
     encrypter.h \
     json.hpp \
     mcq.h \
