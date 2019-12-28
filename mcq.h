@@ -15,9 +15,9 @@ public:
 
     void add_question(const Question & q);
 
+    int correct(const std::vector<const std::vector<bool>> & u_Answers) const;
+    
     void add_grade(const Student & s, int grade);
-
-    int correct(const std::vector<std::vector<bool>> & u_Answers) const;
 
 private:
     const std::string title;
