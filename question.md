@@ -1,9 +1,10 @@
 # Question
 Quesiton Class
 
-### Constructor:
+### Constructors:
 ```cpp
 Question(const std::string& text);
+Question(const Question& q);
 ```
 
 ### Methods:
