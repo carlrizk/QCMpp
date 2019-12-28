@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     answer.cpp \
     encrypter.cpp \
+    loginwindow.cpp \
     main.cpp \
     mcq.cpp \
     question.cpp \
@@ -27,12 +28,14 @@ HEADERS += \
     answer.h \
     encrypter.h \
     json.hpp \
+    loginwindow.h \
     mcq.h \
     question.h \
     user.h
 
 
-FORMS +=
+FORMS += \
+    loginwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
