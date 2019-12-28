@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    admin_ui.cpp \
     answer.cpp \
     encrypter.cpp \
     main.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
     user.cpp
 
 HEADERS += \
+    admin_ui.h \
     answer.h \
     encrypter.h \
     json.hpp \
@@ -32,7 +34,8 @@ HEADERS += \
     user.h
 
 
-FORMS +=
+FORMS += \
+    admin_ui.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
