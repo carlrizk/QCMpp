@@ -1,5 +1,5 @@
 # Question
-Quesiton Class
+Question Class
 
 ### Constructors:
 ```cpp
