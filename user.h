@@ -8,11 +8,11 @@ namespace QCMpp{
 class User
 {
 public:
-    User(const std::string & username,const std::string & password);
+    User(const std::string & username,const std::string & password, bool admin = false);
     User (const User &user) = delete;
 
-    virtual bool isAdmin() const = 0;
-    virtual ~User();
+    bool isAdmin() const;
+    void setAdmin(bool admin);
 
     std::string getUsername() const;
     bool matchPassword(const std::string & pass);
@@ -20,6 +20,7 @@ public:
 private:
     const std::string username;
     const std::string password; //Encrypted
+    bool admin;
 };
 
 }
