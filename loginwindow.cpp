@@ -34,27 +34,27 @@ void LoginWindow::show(bool sign_up_only)
 
 void QCMpp::LoginWindow::on_button_signin_clicked()
 {
-    submit();
+    Encrypter e;
+    string username = this->ui->edit_username->text().toStdString();
+    string password = this->ui->edit_password->text().toStdString();
+    e.encrypt(password);
+
+    emit onSignInSubmit(username, password);
 }
 
 void QCMpp::LoginWindow::on_button_signup_clicked()
-{
-    submit(true);
-}
-
-void LoginWindow::setMessage(const string &message)
-{
-    this->ui->label_message->setText(QString::fromStdString(message));
-}
-
-void LoginWindow::submit(bool sign_up)
 {
     Encrypter e;
     string username = this->ui->edit_username->text().toStdString();
     string password = this->ui->edit_password->text().toStdString();
     e.encrypt(password);
 
-    emit onSubmit(username, password, sign_up);
+    emit onSignUpSubmit(username, password);
+}
+
+void LoginWindow::setMessage(const string &message)
+{
+    this->ui->label_message->setText(QString::fromStdString(message));
 }
 
 }

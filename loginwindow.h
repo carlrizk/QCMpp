@@ -21,7 +21,8 @@ public:
 
 
 signals:
-    void onSubmit(const std::string & username, const std::string & password, bool sign_up = false);
+    void onSignInSubmit(const std::string & username, const std::string & password);
+    void onSignUpSubmit(const std::string & username, const std::string & password);
 
 public slots:
     void show(bool sign_up_only = false);
@@ -33,8 +34,6 @@ private slots:
 
 private:
     Ui::LoginWindow *ui;
-
-    void submit(bool sign_up = false);
 };
 }
 #endif // LOGINWINDOW_H

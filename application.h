@@ -9,6 +9,8 @@
 #include "mcq.h"
 #include "user.h"
 
+#include "loginwindow.h"
+
 namespace QCMpp {
 
 class Application : public QObject
@@ -22,13 +24,20 @@ public:
     ~Application();
 
 public slots:
-    //Example void addUser(string, string) check if username and password valid and add them to the map
+    void onSignInSubmit(const std::string & username, const std::string & password);
+    void onSignUpSubmit(const std::string & username, const std::string & password);
 
 signals:
 
 private:
     std::vector<std::unique_ptr<MCQ>> mcqs;
     std::unordered_map<std::string, std::unique_ptr<User>> users;
+
+    LoginWindow loginWindow;
+
+    void addUser(const User & user);
+    bool userExist(const User & user) const;
+
 
 };
 }
