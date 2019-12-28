@@ -10,7 +10,7 @@ Answer(const std::string & text, const bool correct);
 > ``` cpp
 >bool isCorrect() const;
 >```
->Gets correct's value
+>Indicates if this answer is correct or not
 
 ### Examples:
 ``` cpp
