@@ -5,7 +5,7 @@
 #include<memory>
 #include <unordered_map>
 #include "question.h"
-#include "student.h"
+#include "user.h"
 
 namespace QCMpp{
 class MCQ
@@ -17,7 +17,7 @@ public:
 
     int correct(const std::vector<const std::vector<bool>> & u_Answers) const;
     
-    void add_grade(const Student & s, int grade);
+    void add_grade(const User & u, int grade);
 
 private:
     const std::string title;
