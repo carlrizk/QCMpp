@@ -3,7 +3,7 @@ User class
 
 ### Constructors:
 ``` cpp
-User(const std::string & username,const std::string & password);
+User(const std::string & username,const std::string & password, bool admin = false);
 ```
 
 ### Methods:
@@ -11,6 +11,12 @@ User(const std::string & username,const std::string & password);
 > virtual bool isAdmin() const = 0;
 > ```
 > Returns ```true``` if ```Admin```, ```false``` if ```Student```.
+
+> ```cpp
+> void setAdmin(bool admin);
+> ```
+> Set ```admin``` to ```true``` or ```false```.
+
 
 > ```cpp
 > std::string getUsername() const;
