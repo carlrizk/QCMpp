@@ -26,6 +26,8 @@ void LoginWindow::show(bool sign_up_only)
     this->ui->label_message->clear();
     if(sign_up_only){
         this->ui->button_signin->hide();
+    }else{
+        this->ui->button_signin->show();
     }
     QWidget::show();
 }
