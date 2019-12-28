@@ -9,7 +9,6 @@ class User
 {
 public:
     User(const std::string & username,const std::string & password, bool admin = false);
-    User (const User &user) = delete;
 
     bool isAdmin() const;
     void setAdmin(bool admin);
