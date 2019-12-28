@@ -8,9 +8,9 @@ Question(const std::string& text);
 
 ### Methods:
 >```cpp
->void add_choice(const Answer & a);
+>void add_answer(const Answer & a);
 >```
->Adds a choice to a question
+>Adds an answer to a question
 
 >```cpp
 >bool correct(const std::vector<bool> u_Answers) const;
@@ -22,8 +22,8 @@ Question(const std::string& text);
 Question q1("1+1=?");
 Answer a1("2",true);
 Answer a2("3",false);
-q1.add_choice(a1);
-q1.add_choice(a2);
+q1.add_answer(a1);
+q1.add_answer(a2);
 q1.correct({1,1});      //false
 q1.correct({1,0});      //true
 ```
