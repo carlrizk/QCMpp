@@ -8,12 +8,12 @@ namespace QCMpp{
 class Question
 {
 public:
-    Question(const Question& q) = delete;
+    Question(const Question& q);
 
     Question(const std::string& text);
     //arbitrary number of choices
 
-    void add_choice(const Answer & a);
+    void add_answer(const Answer & a);
 
     bool correct(const std::vector<bool> u_Answers) const;
     //Checks if user's choices are correct
@@ -21,7 +21,7 @@ public:
 
 private:
     const std::string text;
-    std::vector<std::unique_ptr<const Answer>> choices;
+    std::vector<std::unique_ptr<const Answer>> answers;
 };
 }
 #endif // QUESTION_H

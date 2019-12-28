@@ -9,7 +9,7 @@ class User
 {
 public:
     User(const std::string & username,const std::string & password);
-    User (const User &user) = delete;
+//    User (const User &user) = delete;
 
     virtual bool isAdmin() const = 0;
     virtual ~User();
