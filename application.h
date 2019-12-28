@@ -3,6 +3,11 @@
 
 #include <QObject>
 #include <string>
+#include <unordered_map>
+#include <memory>
+
+#include "mcq.h"
+#include "user.h"
 
 namespace QCMpp {
 
@@ -17,11 +22,13 @@ public:
     ~Application();
 
 public slots:
+    //Example void addUser(string, string) check if username and password valid and add them to the map
 
 signals:
 
 private:
-
+    std::vector<std::unique_ptr<MCQ>> mcqs;
+    std::unordered_map<std::string, std::unique_ptr<User>> users;
 
 };
 }
