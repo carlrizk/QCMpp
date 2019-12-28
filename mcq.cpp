@@ -6,7 +6,7 @@ QCMpp::MCQ::MCQ(const std::string &title) : title(title){}
 void QCMpp::MCQ::add_question(const QCMpp::Question &q){questions.push_back(unique_ptr<Question>(new Question(q)));
 }
 
-int QCMpp::MCQ::correct(const std::vector<std::vector<bool> > &u_Answers) const{
+int QCMpp::MCQ::correct(const std::vector<const std::vector<bool> > &u_Answers) const{
     int right_a(0);
     size_t n_questions = questions.size();
     for(size_t i(0); i< n_questions; ++i){
