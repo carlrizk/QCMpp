@@ -13,7 +13,7 @@ MCQ(const std::string & title);
 >Adds a question to the MCQ
 
 >```cpp
->int correct(const std::vector<const std::vector<bool>> & u_Answers) const;
+>int correct(const std::vector<std::vector<bool>> & u_Answers) const;
 >```
 >Checks if the user's answers to the MCQ are correct
 
