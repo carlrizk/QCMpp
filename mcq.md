@@ -18,9 +18,9 @@ MCQ(const std::string & title);
 >Checks if the user's answers to the MCQ are correct
 
 >```cpp
->void add_grade(const Student & s, int grade);
+>void add_grade(const User & u, int grade);
 >```
->Adds a student's grade
+>Adds a user's grade
 
 ### Examples:
 ```cpp
@@ -38,10 +38,10 @@ Answer a4("Answer 2",true);
 q2.add_answer(a3);
 q1.add_answer(a4);
 
-Student s1("my_username","my_encrypted_password");
+User u1("my_username","my_encrypted_password");
 
 mcq1.add_question(q1);
 mcq2.add_question(q2);
 int grade = mcq1({{0,1},{1,0});  //grade = 0
-mcq1.add_grade(s1,grade);
+mcq1.add_grade(u1,grade);
 ```
