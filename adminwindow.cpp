@@ -44,18 +44,18 @@ void AdminWindow::on_mcq_alreadyCreated_currentIndexChanged(int index)
     QList<QString> labels = {"User","Grade"};
     this->ui->table->setHorizontalHeaderLabels(labels);
 
-    //insert_grades((*mcqs)[index]->getGrades());
+    insert_grades(*(*mcqs)[index]->getGrades());
 }
 
 void AdminWindow::insert_grades(std::map<const std::string,const int> u_g)
 {
-    int row = 1;
+    int row = 0;
     for(std::map<const std::string,const int>::iterator it(u_g.begin());it!=u_g.end();++it){
         if (row > this->ui->table->rowCount()){
             this->ui->table->setRowCount(this->ui->table->rowCount()+1);
         }
         this->ui->table->setItem(row,0,new QTableWidgetItem(QString::fromStdString(it->first)));
-        this->ui->table->setItem(row,0,new QTableWidgetItem(it->second));
+        this->ui->table->setItem(row,1,new QTableWidgetItem(it->second));
         ++row;
     }
     this->ui->table->setRowCount(row);
@@ -73,7 +73,6 @@ void AdminWindow::on_users_clicked()
     this->ui->table->setHorizontalHeaderLabels(labels);
 
     emit onRequestUsers();
-
 }
 
 void AdminWindow::updateUsers(const std::map<std::string, std::unique_ptr<User>> & users)
@@ -87,16 +86,16 @@ void AdminWindow::updateUsers(const std::map<std::string, std::unique_ptr<User>>
 
 void AdminWindow::insert_users(std::map<const std::string,bool> u_r)
 {
-    int row = 1;
+    int row = 0;
     for(std::map<const std::string,bool>::iterator it(u_r.begin()); it != u_r.end(); ++it){
         if (row > this->ui->table->rowCount()){
             this->ui->table->insertRow(row);
         }
         this->ui->table->setItem(row,0,new QTableWidgetItem(QString::fromStdString(it->first)));
         if (it->second == true){
-            this->ui->table->setItem(row,0,new QTableWidgetItem("Admin"));
+            this->ui->table->setItem(row,1,new QTableWidgetItem("Admin"));
         }else{
-            this->ui->table->setItem(row,0,new QTableWidgetItem("Student"));
+            this->ui->table->setItem(row,1,new QTableWidgetItem("Student"));
         }
         ++row;
     }
