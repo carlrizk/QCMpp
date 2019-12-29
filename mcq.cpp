@@ -13,7 +13,14 @@ MCQ::MCQ(const MCQ &mcq): title(mcq.title), grades(mcq.grades)
 
 std::string MCQ::getTitle() const{return title;}
 
-std::map<const std::string, const int> MCQ::getGrades() const{return grades;}
+int MCQ::getGrade(const std::string & username) const
+{
+    return grades.at(username);
+}
+
+//std::map<const std::string, const int>* MCQ::getGrades() const{
+//    return grades;
+//}
 
 void MCQ::addQuestion(const QCMpp::Question &q){
     questions.push_back(std::unique_ptr<Question>(new Question(q)));

@@ -26,7 +26,8 @@ public:
 
     std::string getTitle() const;
 
-    std::map<const std::string,const int> getGrades() const ;
+    int getGrade(const std::string & username) const;
+    //std::map<const std::string,const int>* getGrades() const ;
 
     std::ostream& toOstream(std::ostream& os)const;
 

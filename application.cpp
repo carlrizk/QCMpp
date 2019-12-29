@@ -97,14 +97,14 @@ void Application::doConnections()
     if(currentUser->isAdmin()){
         connect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
 
-        //connect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
-        //connect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
+        connect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
+        connect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
 
         connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
         connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
 
         connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
-        //connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+        connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
 
 
     }else{
@@ -124,14 +124,15 @@ void Application::undoConnections()
     if(currentUser->isAdmin()){
         disconnect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
 
-        //disconnect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
-        //disconnect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
+        disconnect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
+        disconnect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
 
         disconnect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
         disconnect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
 
         disconnect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
         disconnect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+
     }else{
         disconnect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
 

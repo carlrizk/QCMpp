@@ -22,13 +22,11 @@ public:
 
     void set_mcqs(const std::vector<std::unique_ptr<MCQ>>& mcqs);
 
-    void updateUsers(std::map<std::string, std::unique_ptr<User>> users);
-
 public slots:
 
     void updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
 
-    void updateUsers(std::map<std::string, std::unique_ptr<User> >& users);
+    void updateUsers(const std::map<std::string, std::unique_ptr<User> >& users);
 
     void showWindow(User * const user);
 

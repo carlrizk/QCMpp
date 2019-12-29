@@ -24,7 +24,7 @@ void AdminWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs){
     this->mcqs = &mcqs;
     QStringList titles;
     for(auto & mcq : mcqs){
-       //this->ui->mcq_alreadyCreated->addItem(QString::fromStdString(mcq->getTitle()));
+       this->ui->mcq_alreadyCreated->addItem(QString::fromStdString(mcq->getTitle()));
     }
 }
 
@@ -76,10 +76,10 @@ void AdminWindow::on_users_clicked()
 
 }
 
-void AdminWindow::updateUsers(std::map<std::string, std::unique_ptr<User> >& users)
+void AdminWindow::updateUsers(const std::map<std::string, std::unique_ptr<User>> & users)
 {
     std::map<const std::string, bool> u_r;
-    for (std::map<std::string, std::unique_ptr<User>>::iterator it(users.begin()); it != users.end(); ++it) {
+    for (auto it = users.begin(); it != users.end(); ++it) {
         u_r.insert({it->first, it->second->isAdmin()});
     }
     insert_users(u_r);
