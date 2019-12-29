@@ -25,6 +25,9 @@ void Admin_ui::on_create_mcq_clicked()
 
 void Admin_ui::on_users_clicked()
 {
+    ui->users->hide();
+    ui->create_mcq->hide();
+    ui->hide_users->show();
     string qcm = this->ui->mcq_alreadyCreated->currentText().toStdString();
 
 }
@@ -47,22 +50,16 @@ void Admin_ui::insert_grades(std::map<const std::string,const int> u_g)
     this->ui->table->insertColumn(1);
     QList<QString> labels = {"User","Grade"};
     this->ui->table->setHorizontalHeaderLabels(labels);
-    int row = 1;
+    int row = 0;
     for(map<const std::string,const int>::iterator it(u_g.begin());it!=u_g.end();++it){
         if (row > this->ui->table->rowCount()){
-            this->ui->table->insertRow(row);
+            this->ui->table->setRowCount(this->ui->table->rowCount()+1);
         }
-        this->ui->table->setCurrentCell(row,0);
-        QTableWidgetItem user_it(QString::fromStdString(it->first));
-        this->ui->table->setCurrentItem(&user_it);
-        this->ui->table->setCurrentCell(row,1);
-        QTableWidgetItem grade_it(it->second);
-        this->ui->table->setCurrentItem(&grade_it);
+        this->ui->table->setItem(row,0,new QTableWidgetItem(QString::fromStdString(it->first)));
+        this->ui->table->setItem(row,0,new QTableWidgetItem(it->second));
         ++row;
     }
-    while(row < this->ui->table->rowCount()){
-        this->ui->table->removeRow(row);
-    }
+    this->ui->table->setRowCount(row);
 }
 
 void Admin_ui::create_mcq()
@@ -88,21 +85,14 @@ void Admin_ui::insert_users(std::map<const std::string,bool> u_r)
         if (row > this->ui->table->rowCount()){
             this->ui->table->insertRow(row);
         }
-        this->ui->table->setCurrentCell(row,0);
-        QTableWidgetItem user_it(QString::fromStdString(it->first));
-        this->ui->table->setCurrentItem(&user_it);
-        this->ui->table->setCurrentCell(row,1);
+        this->ui->table->setItem(row,0,new QTableWidgetItem(QString::fromStdString(it->first)));
         if (it->second == true){
-            QTableWidgetItem rank_it(QString::fromStdString("Admin"));
-            this->ui->table->setCurrentItem(&rank_it);
+            this->ui->table->setItem(row,0,new QTableWidgetItem("Admin"));
         }else{
-            QTableWidgetItem rank_it(QString::fromStdString("Student"));
-            this->ui->table->setCurrentItem(&rank_it);
+            this->ui->table->setItem(row,0,new QTableWidgetItem("Student"));
         }
         ++row;
     }
-    while(row < this->ui->table->rowCount()){
-        this->ui->table->removeRow(row);
-    }
+    this->ui->table->setRowCount(row);
 }
 

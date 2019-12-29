@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Profile</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -47,12 +47,12 @@
    </property>
    <column>
     <property name="text">
-     <string>Users</string>
+     <string>User</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Grades</string>
+     <string>Grade</string>
     </property>
    </column>
   </widget>
