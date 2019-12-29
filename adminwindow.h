@@ -27,7 +27,12 @@ public:
 public slots:
 
     void updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
-    //void updateUsers(const std::)
+
+    void updateUsers(std::map<std::string, std::unique_ptr<User> >& users);
+
+    void showWindow(User * const user);
+
+    void hideWindow();
 
 signals:
     void onPromoteUser(const std::string & username);
@@ -38,17 +43,19 @@ signals:
 
     void onSignOutSubmit();
 
+    void onCreateMCQ();
+
 
 private slots:
-//    void on_create_mcq_clicked();
+    void on_create_mcq_clicked();
 
     void on_users_clicked();
-
-//    void on_hide_users_clicked();
 
     void on_mcq_alreadyCreated_currentIndexChanged(int index);
 
     void on_sign_out_clicked();
+
+    void on_promote_clicked();
 
 private:
     Ui::AdminWindow *ui;

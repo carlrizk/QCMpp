@@ -11,7 +11,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui(new Ui::AdminWindow)
 {
     ui->setupUi(this);
-    ui->hide_users->hide();
+    ui->promote->hide();
     emit onRequestMCQs();
 }
 
@@ -19,8 +19,6 @@ AdminWindow::~AdminWindow()
 {
     delete ui;
 }
-
-
 
 void AdminWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs){
     this->mcqs = &mcqs;
@@ -30,29 +28,16 @@ void AdminWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs){
     }
 }
 
-
-
-//void AdminWindow::on_create_mcq_clicked()
-//{
-
-//}
-
-
-
-
-//void AdminWindow::on_hide_users_clicked()
-//{
-//    ui->hide_users->hide();
-//    ui->mcq_alreadyCreated->show();
-//    ui->create_mcq->show();
-//    ui->table->clearContents();
-//    //insert_grades()
-
-//}
+void QCMpp::AdminWindow::on_create_mcq_clicked()
+{
+    emit onCreateMCQ();
+}
 
 void AdminWindow::on_mcq_alreadyCreated_currentIndexChanged(int index)
 {
     //Preparing the table
+    ui->promote->hide();
+    ui->users->show();
     this->ui->table->clearContents();
     this->ui->table->removeColumn(1);
     this->ui->table->insertColumn(1);
@@ -80,9 +65,7 @@ void AdminWindow::on_users_clicked()
 {
     //Preparing Window and table
     ui->users->hide();
-    ui->create_mcq->hide();
-    ui->hide_users->show();
-    ui->create_mcq->hide();
+    ui->promote->show();
     this->ui->table->clearContents();
     this->ui->table->removeColumn(1);
     this->ui->table->insertColumn(1);
@@ -93,7 +76,7 @@ void AdminWindow::on_users_clicked()
 
 }
 
-void AdminWindow::updateUsers(std::map<std::string, std::unique_ptr<User> > users)
+void AdminWindow::updateUsers(std::map<std::string, std::unique_ptr<User> >& users)
 {
     std::map<const std::string, bool> u_r;
     for (std::map<std::string, std::unique_ptr<User>>::iterator it(users.begin()); it != users.end(); ++it) {
@@ -120,19 +103,29 @@ void AdminWindow::insert_users(std::map<const std::string,bool> u_r)
     this->ui->table->setRowCount(row);
 }
 
+void QCMpp::AdminWindow::on_promote_clicked()
+{
+    QList<QTableWidgetItem *> row = ui->table->selectedItems();
+    std::string username = row[0]->text().toStdString();
+    emit onPromoteUser(username);
+}
+
 
 void QCMpp::AdminWindow::on_sign_out_clicked()
 {
     emit onSignOutSubmit();
 }
 
-
+void QCMpp::AdminWindow::showWindow(User * const user){
+    setWindowTitle(QString::fromStdString("Logged in as "+ user->getUsername()+" (Admin)"));
+    this->ui->label_username->setText(QString::fromStdString(user->getUsername()));
+    show();
 }
 
+void QCMpp::AdminWindow::hideWindow(){
+    ui->mcq_alreadyCreated->clear();
+    ui->table->clearContents();
+    hide();
+}
 
-void QCMpp::AdminWindow::on_promote_clicked()
-{
-    QList<QTableWidgetItem *> row = ui->table->selectedItems();
-    std::string username = row[0]->text().toStdString();
-    emit onPromoteUser(username);
 }
