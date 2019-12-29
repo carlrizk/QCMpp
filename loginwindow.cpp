@@ -21,13 +21,9 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::show(bool sign_up_only)
 {
-    this->ui->edit_password->clear();
-    this->ui->edit_username->clear();
-    this->ui->label_message->clear();
+    reset();
     if(sign_up_only){
         this->ui->button_signin->hide();
-    }else{
-        this->ui->button_signin->show();
     }
     QWidget::show();
 }
@@ -50,6 +46,14 @@ void QCMpp::LoginWindow::on_button_signup_clicked()
     e.encrypt(password);
 
     emit onSignUpSubmit(username, password);
+}
+
+void LoginWindow::reset() const
+{
+    this->ui->edit_password->clear();
+    this->ui->edit_username->clear();
+    this->ui->label_message->clear();
+    this->ui->button_signin->show();
 }
 
 void LoginWindow::setMessage(const string &message)

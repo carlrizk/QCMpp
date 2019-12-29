@@ -15,7 +15,6 @@ namespace QCMpp {
 
 class Application : public QObject
 {
-
     Q_OBJECT
 
 public:
@@ -28,6 +27,7 @@ public slots:
     void onSignUpSubmit(const std::string & username, const std::string & password);
 
 signals:
+    void onLogin(User * const user);
 
 private:
     std::vector<std::unique_ptr<MCQ>> mcqs;
@@ -35,8 +35,11 @@ private:
 
     LoginWindow loginWindow;
 
+    User* currentUser;
     void addUser(const User & user);
     bool userExist(const User & user) const;
+    User* getUser(const User & user) const;
+    void login(const User & user);
 
 
 };

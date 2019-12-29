@@ -34,6 +34,8 @@ private slots:
 
 private:
     Ui::LoginWindow *ui;
+
+    void reset() const;
 };
 }
 #endif // LOGINWINDOW_H
