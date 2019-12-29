@@ -146,13 +146,15 @@ void Application::LoadJSON(const std::string & data)
     json accounts_data = json_data["Accounts"];
     LoadUsers(accounts_data);
 
-    //LOAD MCQs
+    json mcqs_data = json_data["MCQs"];
+    LoadMCQs(mcqs_data);
 }
 void Application::SaveToJSON(nlohmann::json & data) const
 {
     data["Accounts"]= {};
     SaveUsers(data["Accounts"]);
-    //Save MCQs
+    data["MCQs"] = {};
+    SaveMCQs(data["MCQs"]);
 }
 
 void Application::LoadUsers(const nlohmann::json & accounts_data)
@@ -166,6 +168,16 @@ void Application::SaveUsers(nlohmann::json & accounts_data) const
     for (auto &user : users) {
         user.second->toJSON(accounts_data);
     }
+}
+
+void Application::LoadMCQs(const nlohmann::json &json)
+{
+
+}
+
+void Application::SaveMCQs(nlohmann::json &mcqs_data) const
+{
+
 }
 
 }
