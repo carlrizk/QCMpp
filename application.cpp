@@ -12,7 +12,7 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
 {
     LoadData();
 
-    loginWindow.show();
+    loginWindow.show(users.size() == 0);
     connect(&loginWindow, &LoginWindow::onSignInSubmit, this, &Application::onSignInSubmit);
     connect(&loginWindow, &LoginWindow::onSignUpSubmit, this, &Application::onSignUpSubmit);
     connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::close);
@@ -38,7 +38,7 @@ void Application::onSignInSubmit(const std::string &username, const std::string 
 }
 void Application::onSignUpSubmit(const std::string &username, const std::string &password)
 {
-    User user(username, password);
+    User user(username, password, users.size() == 0);
     if(username.length() <= 3){
         loginWindow.setMessage("Username must be at least 3 characters long.");
         return;
@@ -79,7 +79,7 @@ bool Application::userExist(const User &user) const
 
 void Application::LoadData()
 {
-    std::ifstream file(configuration_path);
+    std::ifstream file(data_path);
     std::string data( (std::istreambuf_iterator<char>(file) ),
                       (std::istreambuf_iterator<char>()    ) );
     file.close();
@@ -95,7 +95,7 @@ void Application::SaveData() const
     std::string data_string = data.dump();
     Encrypter e;
     e.encrypt(data_string);
-    std::ofstream file(configuration_path);
+    std::ofstream file(data_path);
     file << data_string;
     file.close();
 }
