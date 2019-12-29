@@ -36,7 +36,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTableWidget" name="grade_table">
+  <widget class="QTableWidget" name="table">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -60,7 +60,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>210</y>
+     <y>250</y>
      <width>151</width>
      <height>32</height>
     </rect>
@@ -72,14 +72,27 @@
   <widget class="QPushButton" name="users">
    <property name="geometry">
     <rect>
-     <x>242</x>
-     <y>250</y>
+     <x>240</x>
+     <y>220</y>
      <width>151</width>
      <height>32</height>
     </rect>
    </property>
    <property name="text">
     <string>Users</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="hide_users">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>250</y>
+     <width>151</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Hide</string>
    </property>
   </widget>
  </widget>

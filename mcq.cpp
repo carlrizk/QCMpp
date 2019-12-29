@@ -16,4 +16,4 @@ int QCMpp::MCQ::correct(const std::vector<std::vector<bool> > &u_Answers) const{
     return right_a/n_questions;
 }
 
-void QCMpp::MCQ::add_grade(const QCMpp::User & u, int grade){grades.insert({u.getUsername(), grade});}
+void QCMpp::MCQ::add_grade(const QCMpp::User & u,const int grade){grades.insert({u.getUsername(), grade});}

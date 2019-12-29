@@ -3,7 +3,7 @@
 #include <string>
 #include<vector>
 #include<memory>
-#include <unordered_map>
+#include <map>
 #include "question.h"
 #include "user.h"
 
@@ -17,12 +17,12 @@ public:
 
     int correct(const std::vector<std::vector<bool>> & u_Answers) const;
     
-    void add_grade(const User & u, int grade);
+    void add_grade(const User & u,const int grade);
 
 private:
     const std::string title;
     std::vector<std::unique_ptr<const Question>> questions;
-    std::unordered_map<std::string,int> grades;
+    std::map<const std::string,const int> grades;
 };
 }
 #endif // MCQ_H
