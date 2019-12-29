@@ -23,7 +23,8 @@ SOURCES += \
     main.cpp \
     mcq.cpp \
     question.cpp \
-    user.cpp
+    user.cpp \
+    userwindow.cpp
 
 HEADERS += \
     answer.h \
@@ -33,11 +34,13 @@ HEADERS += \
     loginwindow.h \
     mcq.h \
     question.h \
-    user.h
+    user.h \
+    userwindow.h
 
 
 FORMS += \
-    loginwindow.ui
+    loginwindow.ui \
+    userwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

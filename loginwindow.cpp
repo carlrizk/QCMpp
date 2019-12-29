@@ -12,20 +12,13 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
+
+    reset();
 }
 
 LoginWindow::~LoginWindow()
 {
     delete ui;
-}
-
-void LoginWindow::show(bool sign_up_only)
-{
-    reset();
-    if(sign_up_only){
-        this->ui->button_signin->hide();
-    }
-    QWidget::show();
 }
 
 void QCMpp::LoginWindow::on_button_signin_clicked()
@@ -61,4 +54,23 @@ void LoginWindow::setMessage(const string &message)
     this->ui->label_message->setText(QString::fromStdString(message));
 }
 
+void LoginWindow::showWindow(bool sign_up_only)
+{
+    if(sign_up_only){
+        this->ui->button_signin->hide();
+        setWindowTitle("Sign Up");
+    }else{
+        setWindowTitle("Sign In or Sign Up");
+    }
+    show();
 }
+
+void LoginWindow::hideWindow()
+{
+    reset();
+    hide();
+}
+
+}
+
+
