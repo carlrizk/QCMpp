@@ -11,6 +11,8 @@ Admin_ui::Admin_ui(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->hide_users->hide();
+
+    //ui->mcq_alreadyCreated->addItem()
 }
 
 Admin_ui::~Admin_ui()
@@ -23,24 +25,27 @@ void Admin_ui::on_create_mcq_clicked()
 
 }
 
+
 void Admin_ui::on_users_clicked()
 {
     ui->users->hide();
     ui->create_mcq->hide();
     ui->hide_users->show();
-    string qcm = this->ui->mcq_alreadyCreated->currentText().toStdString();
+    int index = ui->mcq_alreadyCreated->currentIndex();
+
 
 }
 
 void Admin_ui::on_hide_users_clicked()
 {
+    ui->hide_users->hide();
+    ui->mcq_alreadyCreated->show();
+    ui->create_mcq->show();
+    ui->table->clearContents();
+    //insert_grades()
 
 }
 
-void Admin_ui::on_mcq_alreadyCreated_currentTextChanged(const QString &arg1)
-{
-    string qcm = arg1.toStdString();
-}
 
 void Admin_ui::insert_grades(std::map<const std::string,const int> u_g)
 {
@@ -101,3 +106,8 @@ void Admin_ui::insert_users(std::map<const std::string,bool> u_r)
     this->ui->table->setRowCount(row);
 }
 
+
+void Admin_ui::on_mcq_alreadyCreated_currentIndexChanged(int index)
+{
+
+}
