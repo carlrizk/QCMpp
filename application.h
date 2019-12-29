@@ -28,11 +28,15 @@ public slots:
     void signInSlot(const std::string & username, const std::string & password);
     void signUpSlot(const std::string & username, const std::string & password);
     void signOutSlot();
+    void requestUsersSlot();
+    void requestMCQsSlot();
 
 signals:
     void onApplicationStart(bool first_start = false);
     void onSignIn(User * const user);
     void onSignOut();
+    void onRequestMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
+    void onRequestUsers(const std::map<std::string, std::unique_ptr<User>> & users);
 
 private:
     const std::string data_path;

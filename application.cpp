@@ -67,6 +67,15 @@ void Application::signOutSlot()
     signOut();
 }
 
+void Application::requestUsersSlot()
+{
+    emit onRequestUsers(users);
+}
+void Application::requestMCQsSlot()
+{
+    emit onRequestMCQs(mcqs);
+}
+
 void Application::signIn(const User &user)
 {
     currentUser = getUser(user);
