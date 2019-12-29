@@ -17,6 +17,12 @@ public:
     MCQ(const std::string & title);
 
     MCQ(const MCQ & mcq);
+  
+    std::string getTitle();
+    //to implements
+
+    std::map<const std::string,const int> getGrades();
+    //to implement
 
     void addQuestion(const Question & q);
 

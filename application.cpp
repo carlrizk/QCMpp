@@ -19,7 +19,7 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
     connect(&loginWindow, &LoginWindow::onSignUpSubmit, this, &Application::signUpSlot);
 
     connect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
-    //connect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
+    connect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
 
     connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::hideWindow);
     connect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
@@ -28,14 +28,14 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
     connect(this, &Application::onSignOut, &loginWindow, &LoginWindow::show);
 
     connect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
-    //connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+    connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
 
-    //connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
+    connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
 
     connect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
-    //connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
+    connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
 
-    //connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+    connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
 
     emit onApplicationStart(users.size() == 0);
 }
