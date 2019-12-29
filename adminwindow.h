@@ -20,24 +20,35 @@ public:
     explicit AdminWindow(QWidget *parent = nullptr);
     ~AdminWindow();
 
+    void set_mcqs(const std::vector<std::unique_ptr<MCQ>>& mcqs);
+
+    void updateUsers(std::map<std::string, std::unique_ptr<User>> users);
+
 public slots:
 
-    //void setMcq(int index);
+    void updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
+    //void updateUsers(const std::)
 
 signals:
-    void Promote_u(const std::string & username);
+ //   void onPromoteUser(const std::string & username);
 
-    void Create_mcq(const QCMpp::MCQ& mcq);
+    void onRequestMCQs();
+
+    void onRequestUsers();
+
+    void onSignOutSubmit();
 
 
 private slots:
 //    void on_create_mcq_clicked();
 
-//    void on_users_clicked();
+    void on_users_clicked();
 
 //    void on_hide_users_clicked();
 
-//    void on_mcq_alreadyCreated_currentIndexChanged(int index);
+    void on_mcq_alreadyCreated_currentIndexChanged(int index);
+
+    void on_sign_out_clicked();
 
 private:
     Ui::AdminWindow *ui;
@@ -47,6 +58,8 @@ private:
     void create_mcq();
 
     void insert_users(std::map<const std::string,bool> u_r);
+
+    const std::vector<std::unique_ptr<MCQ>> * mcqs;
 };
 
 }

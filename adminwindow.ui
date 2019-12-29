@@ -60,7 +60,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>250</y>
+     <y>220</y>
      <width>151</width>
      <height>32</height>
     </rect>
@@ -73,7 +73,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>220</y>
+     <y>190</y>
      <width>151</width>
      <height>32</height>
     </rect>
@@ -86,13 +86,26 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>250</y>
+     <y>220</y>
      <width>151</width>
      <height>32</height>
     </rect>
    </property>
    <property name="text">
     <string>Hide</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sign_out">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>250</y>
+     <width>151</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sign Out</string>
    </property>
   </widget>
  </widget>

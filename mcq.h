@@ -13,6 +13,12 @@ class MCQ
 public:
     MCQ(const std::string & title);
 
+    std::string getTitle();
+    //to implements
+
+    std::map<const std::string,const int> getGrades();
+    //to implement
+
     void addQuestion(const Question & q);
 
     int isCorrect(const std::vector<std::vector<bool>> & u_Answers) const;
