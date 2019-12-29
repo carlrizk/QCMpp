@@ -3,11 +3,12 @@
 
 #include <QObject>
 #include <string>
-#include <unordered_map>
+#include <map>
 #include <memory>
 
 #include "mcq.h"
 #include "user.h"
+#include "json.hpp"
 
 #include "loginwindow.h"
 
@@ -30,8 +31,9 @@ signals:
     void onSignIn(User * const user);
 
 private:
+    const std::string data_path;
     std::vector<std::unique_ptr<MCQ>> mcqs;
-    std::unordered_map<std::string, std::unique_ptr<User>> users;
+    std::map<std::string, std::unique_ptr<User>> users;
 
     LoginWindow loginWindow;
 
@@ -41,7 +43,14 @@ private:
     User* getUser(const User & user) const;
     void signIn(const User & user);
 
+    void LoadData();
+    void SaveData() const;
 
+    void LoadJSON(const std::string & data);
+    void SaveToJSON(nlohmann::json & data) const;
+
+    void LoadUsers(const nlohmann::json & json);
+    void SaveUsers(nlohmann::json & accounts_data) const;
 };
 }
 #endif // APPLICATION_H

@@ -1,22 +1,26 @@
 #include "application.h"
 
+#include <fstream>
+#include "json.hpp"
+#include "encrypter.h"
+
+#include <iostream>
+
 namespace QCMpp {
 
-Application::Application(const std::string &configuration_path): currentUser(nullptr)
+Application::Application(const std::string &data_path): data_path(data_path), currentUser(nullptr)
 {
-    //Load JSON
-
-    addUser(User("test", "whvw")); //password test
+    LoadData();
 
     loginWindow.show();
     connect(&loginWindow, &LoginWindow::onSignInSubmit, this, &Application::onSignInSubmit);
     connect(&loginWindow, &LoginWindow::onSignUpSubmit, this, &Application::onSignUpSubmit);
-    connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::hide);
+    connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::close);
 }
 
 Application::~Application()
 {
-    //Save to JSON
+    SaveData();
 }
 
 void Application::onSignInSubmit(const std::string &username, const std::string &password)
@@ -28,10 +32,10 @@ void Application::onSignInSubmit(const std::string &username, const std::string 
     }
     if(!getUser(user)->matchPassword(password)){
         loginWindow.setMessage("Wrong password.");
+        return;
     }
     signIn(user);
 }
-
 void Application::onSignUpSubmit(const std::string &username, const std::string &password)
 {
     User user(username, password);
@@ -71,6 +75,59 @@ bool Application::userExist(const User &user) const
         return false;
     }
     return true;
+}
+
+void Application::LoadData()
+{
+    std::ifstream file(configuration_path);
+    std::string data( (std::istreambuf_iterator<char>(file) ),
+                      (std::istreambuf_iterator<char>()    ) );
+    file.close();
+    if(data.empty()) return;
+    Encrypter e;
+    e.decrypt(data);
+    LoadJSON(data);
+}
+void Application::SaveData() const
+{
+    nlohmann::json data;
+    SaveToJSON(data);
+    std::string data_string = data.dump();
+    Encrypter e;
+    e.encrypt(data_string);
+    std::ofstream file(configuration_path);
+    file << data_string;
+    file.close();
+}
+
+void Application::LoadJSON(const std::string & data)
+{
+    using namespace nlohmann;
+    json json_data = json::parse(data);
+
+    json accounts_data = json_data["Accounts"];
+    LoadUsers(accounts_data);
+
+    //LOAD MCQs
+}
+void Application::SaveToJSON(nlohmann::json & data) const
+{
+    data["Accounts"]= {};
+    SaveUsers(data["Accounts"]);
+    //Save MCQs
+}
+
+void Application::LoadUsers(const nlohmann::json & accounts_data)
+{
+    for (auto it = accounts_data.begin(); it != accounts_data.end(); ++it) {
+        addUser(User(it.key(), it.value()["password"], it.value()["admin"]));
+    }
+}
+void Application::SaveUsers(nlohmann::json & accounts_data) const
+{
+    for (auto &user : users) {
+        user.second->toJSON(accounts_data);
+    }
 }
 
 }

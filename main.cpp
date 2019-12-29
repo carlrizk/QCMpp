@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 
    QApplication a(argc, argv);
 
-    QCMpp::Application app("");
+   QCMpp::Application app("data.json");
 
    return a.exec();
 }
