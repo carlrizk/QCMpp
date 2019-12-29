@@ -50,7 +50,7 @@ void Admin_ui::insert_grades(std::map<const std::string,const int> u_g)
     this->ui->table->insertColumn(1);
     QList<QString> labels = {"User","Grade"};
     this->ui->table->setHorizontalHeaderLabels(labels);
-    int row = 0;
+    int row = 1;
     for(map<const std::string,const int>::iterator it(u_g.begin());it!=u_g.end();++it){
         if (row > this->ui->table->rowCount()){
             this->ui->table->setRowCount(this->ui->table->rowCount()+1);
@@ -64,10 +64,15 @@ void Admin_ui::insert_grades(std::map<const std::string,const int> u_g)
 
 void Admin_ui::create_mcq()
 {
+    //Removing items from interface
+    this->ui->table->clearContents();
     this->ui->table->hide();
     this->ui->label->hide();
     this->ui->create_mcq->hide();
     this->ui->users->hide();
+
+    //Adding items to interface
+
 
 }
 
