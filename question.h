@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "answer.h"
+#include "json.hpp"
 
 
 namespace QCMpp{
@@ -21,9 +22,17 @@ public:
     //Checks if user's choices are correct
     //Vector could contain 0s and 1s, treated as bool
 
+    std::ostream& toOstream(std::ostream& os)const;
+
+    void toJSON(nlohmann::json & data) const;
+
 private:
     const std::string text;
     std::vector<std::unique_ptr<const Answer>> answers;
 };
+
+std::ostream& operator<<(std::ostream& os, const Question& quest);
+
+
 }
 #endif // QUESTION_H
