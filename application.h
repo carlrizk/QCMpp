@@ -11,6 +11,7 @@
 #include "json.hpp"
 
 #include "loginwindow.h"
+#include "userwindow.h"
 
 namespace QCMpp {
 
@@ -24,24 +25,31 @@ public:
     ~Application();
 
 public slots:
-    void onSignInSubmit(const std::string & username, const std::string & password);
-    void onSignUpSubmit(const std::string & username, const std::string & password);
+    void signInSlot(const std::string & username, const std::string & password);
+    void signUpSlot(const std::string & username, const std::string & password);
+    void signOutSlot();
 
 signals:
+    void onApplicationStart(bool first_start = false);
     void onSignIn(User * const user);
+    void onSignOut();
 
 private:
     const std::string data_path;
+
     std::vector<std::unique_ptr<MCQ>> mcqs;
     std::map<std::string, std::unique_ptr<User>> users;
 
     LoginWindow loginWindow;
+    UserWindow userWindow;
 
     User* currentUser;
     void addUser(const User & user);
     bool userExist(const User & user) const;
     User* getUser(const User & user) const;
+
     void signIn(const User & user);
+    void signOut();
 
     void LoadData();
     void SaveData() const;

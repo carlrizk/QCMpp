@@ -22,7 +22,7 @@ public:
 private:
     const std::string title;
     std::vector<std::unique_ptr<const Question>> questions;
-    std::map<cont std::string,const int> grades;
+    std::map<const std::string,const int> grades;
 };
 }
 #endif // MCQ_H
