@@ -33,17 +33,14 @@ int MCQ::correct(const std::vector<std::vector<bool> > &u_Answers) const{
 std::string MCQ::getTitle() const{
     return title;
 }
-
 const Question * MCQ::getQuestion(int id) const
 {
     return questions.at(id).get();
 }
-
 int MCQ::getGrade(const std::string & username) const
 {
     return grades.at(username);
 }
-
 const std::map<const std::string, const int>* MCQ::getGrades() const{
     return &grades;
 }

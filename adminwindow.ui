@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>410</width>
     <height>300</height>
    </rect>
   </property>
@@ -26,7 +26,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QComboBox" name="mcq_alreadyCreated">
+  <widget class="QComboBox" name="combobox_mcqs">
    <property name="geometry">
     <rect>
      <x>270</x>
@@ -45,6 +45,9 @@
      <height>192</height>
     </rect>
    </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
    <column>
     <property name="text">
      <string>User</string>
@@ -56,7 +59,7 @@
     </property>
    </column>
   </widget>
-  <widget class="QPushButton" name="create_mcq">
+  <widget class="QPushButton" name="button_createmcq">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -69,7 +72,7 @@
     <string>Create a new MCQ</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="users">
+  <widget class="QPushButton" name="button_users">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -82,7 +85,7 @@
     <string>Users</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="sign_out">
+  <widget class="QPushButton" name="button_signout">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -95,7 +98,7 @@
     <string>Sign Out</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="promote">
+  <widget class="QPushButton" name="button_promote">
    <property name="geometry">
     <rect>
      <x>240</x>

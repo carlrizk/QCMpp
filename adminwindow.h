@@ -20,8 +20,6 @@ public:
     explicit AdminWindow(QWidget *parent = nullptr);
     ~AdminWindow();
 
-    void set_mcqs(const std::vector<std::unique_ptr<MCQ>>& mcqs);
-
 public slots:
 
     void updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
@@ -45,15 +43,15 @@ signals:
 
 
 private slots:
-    void on_create_mcq_clicked();
+    void on_button_createmcq_clicked();
 
-    void on_users_clicked();
+    void on_button_users_clicked();
 
-    void on_mcq_alreadyCreated_currentIndexChanged(int index);
+    void on_combobox_mcqs_currentIndexChanged(int index);
 
-    void on_sign_out_clicked();
+    void on_button_signout_clicked();
 
-    void on_promote_clicked();
+    void on_button_promote_clicked();
 
 private:
     Ui::AdminWindow *ui;

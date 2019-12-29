@@ -11,7 +11,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui(new Ui::AdminWindow)
 {
     ui->setupUi(this);
-    ui->promote->hide();
+    ui->button_promote->hide();
     emit onRequestMCQs();
 }
 
@@ -24,20 +24,20 @@ void AdminWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs){
     this->mcqs = &mcqs;
     QStringList titles;
     for(auto & mcq : mcqs){
-       this->ui->mcq_alreadyCreated->addItem(QString::fromStdString(mcq->getTitle()));
+       this->ui->combobox_mcqs->addItem(QString::fromStdString(mcq->getTitle()));
     }
 }
 
-void QCMpp::AdminWindow::on_create_mcq_clicked()
+void QCMpp::AdminWindow::on_button_createmcq_clicked()
 {
     emit onCreateMCQ();
 }
 
-void AdminWindow::on_mcq_alreadyCreated_currentIndexChanged(int index)
+void AdminWindow::on_combobox_mcqs_currentIndexChanged(int index)
 {
     //Preparing the table
-    ui->promote->hide();
-    ui->users->show();
+    ui->button_promote->hide();
+    ui->button_users->show();
     this->ui->table->clearContents();
     this->ui->table->removeColumn(1);
     this->ui->table->insertColumn(1);
@@ -61,11 +61,11 @@ void AdminWindow::insert_grades(std::map<const std::string,const int> u_g)
     this->ui->table->setRowCount(row);
 }
 
-void AdminWindow::on_users_clicked()
+void AdminWindow::on_button_users_clicked()
 {
     //Preparing Window and table
-    ui->users->hide();
-    ui->promote->show();
+    ui->button_users->hide();
+    ui->button_promote->show();
     this->ui->table->clearContents();
     this->ui->table->removeColumn(1);
     this->ui->table->insertColumn(1);
@@ -102,7 +102,7 @@ void AdminWindow::insert_users(std::map<const std::string,bool> u_r)
     this->ui->table->setRowCount(row);
 }
 
-void QCMpp::AdminWindow::on_promote_clicked()
+void QCMpp::AdminWindow::on_button_promote_clicked()
 {
     QList<QTableWidgetItem *> row = ui->table->selectedItems();
     std::string username = row[0]->text().toStdString();
@@ -110,7 +110,7 @@ void QCMpp::AdminWindow::on_promote_clicked()
 }
 
 
-void QCMpp::AdminWindow::on_sign_out_clicked()
+void QCMpp::AdminWindow::on_button_signout_clicked()
 {
     emit onSignOutSubmit();
 }
@@ -122,7 +122,7 @@ void QCMpp::AdminWindow::showWindow(User * const user){
 }
 
 void QCMpp::AdminWindow::hideWindow(){
-    ui->mcq_alreadyCreated->clear();
+    ui->combobox_mcqs->clear();
     ui->table->clearContents();
     hide();
 }
