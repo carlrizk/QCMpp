@@ -55,16 +55,18 @@ private:
     void signIn(const User & user);
     void signOut();
 
+    void addMCQ(const MCQ & mcq);
+
     void LoadData();
     void SaveData() const;
 
     void LoadJSON(const std::string & data);
     void SaveToJSON(nlohmann::json & data) const;
 
-    void LoadUsers(const nlohmann::json & json);
+    void LoadUsers(const nlohmann::json & accounts_data);
     void SaveUsers(nlohmann::json & accounts_data) const;
 
-    void LoadMCQs(const nlohmann::json & json);
+    void LoadMCQs(const nlohmann::json & mcqs_data);
     void SaveMCQs(nlohmann::json & mcqs_data) const;
 };
 }

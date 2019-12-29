@@ -4,6 +4,9 @@
 #include "json.hpp"
 #include "encrypter.h"
 
+#include <iostream>
+#include<mcq.h>
+
 namespace QCMpp {
 
 Application::Application(const std::string &data_path): data_path(data_path), currentUser(nullptr)
@@ -98,6 +101,11 @@ void Application::signOut()
     emit onSignOut();
 }
 
+void Application::addMCQ(const MCQ &mcq)
+{
+    mcqs.push_back(std::unique_ptr<MCQ>(new MCQ(mcq)));
+}
+
 void Application::addUser(const User &user)
 {
     users[user.getUsername()] = std::unique_ptr<User>(new User(user));
@@ -170,14 +178,33 @@ void Application::SaveUsers(nlohmann::json & accounts_data) const
     }
 }
 
-void Application::LoadMCQs(const nlohmann::json &json)
+void Application::LoadMCQs(const nlohmann::json &mcqs_data)
 {
-
+    for (auto& mcq_data : mcqs_data) {
+        MCQ mcq(mcq_data["Title"]);
+        nlohmann::json passed_students_data = mcq_data["Passed Students"];
+        for (auto it = passed_students_data.begin(); it != passed_students_data.end(); ++it) {
+            mcq.addGrade(it.key(), it.value());
+        }
+        nlohmann::json questions_data = mcq_data["Questions"];
+        for(auto& quest_data : questions_data){
+            Question quest(quest_data["Question"]);
+            nlohmann::json answers_data = quest_data["Answers"];
+            for(auto& ans_data : answers_data){
+                Answer ans(ans_data["Answer"], ans_data["Correct"]);
+                quest.addAnswer(ans);
+            }
+            mcq.addQuestion(quest);
+        }
+        addMCQ(mcq);
+    }
 }
 
 void Application::SaveMCQs(nlohmann::json &mcqs_data) const
 {
-
+    for (auto &mcq : mcqs) {
+        mcq->toJSON(mcqs_data);
+    }
 }
 
 }
