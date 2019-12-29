@@ -21,6 +21,7 @@ QCM++ project
         {
             "Questions" : [
                 {
+                    "Name" : NAME,
                     "Question" : QUESTION,
                     "Answers" : [
                         {
