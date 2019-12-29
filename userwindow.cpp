@@ -25,7 +25,6 @@ UserWindow::~UserWindow()
 
 void UserWindow::showWindow(User * const user)
 {
-    if(user->isAdmin()) return;
     currentUser = user;
     setWindowTitle(QString::fromStdString("Logged In as " + currentUser->getUsername() + " (Student)"));
     this->ui->label_username->setText(QString::fromStdString(currentUser->getUsername()));

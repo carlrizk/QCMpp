@@ -5,7 +5,7 @@
 #include "encrypter.h"
 
 #include <iostream>
-#include<mcq.h>
+#include <mcq.h>
 
 namespace QCMpp {
 
@@ -18,24 +18,8 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
     connect(&loginWindow, &LoginWindow::onSignInSubmit, this, &Application::signInSlot);
     connect(&loginWindow, &LoginWindow::onSignUpSubmit, this, &Application::signUpSlot);
 
-    connect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
-    connect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
-
     connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::hideWindow);
-    connect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
-
-    connect(this, &Application::onSignOut, &userWindow, &UserWindow::hideWindow);
     connect(this, &Application::onSignOut, &loginWindow, &LoginWindow::show);
-
-    connect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
-    connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
-
-    connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
-
-    connect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
-    connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
-
-    connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
 
     emit onApplicationStart(users.size() == 0);
 }
@@ -93,17 +77,71 @@ void Application::requestMCQsSlot()
 void Application::signIn(const User &user)
 {
     currentUser = getUser(user);
+    doConnections();
     emit onSignIn(currentUser);
 }
 void Application::signOut()
 {
-    currentUser = nullptr;
     emit onSignOut();
+    undoConnections();
+    currentUser = nullptr;
 }
 
 void Application::addMCQ(const MCQ &mcq)
 {
     mcqs.push_back(std::unique_ptr<MCQ>(new MCQ(mcq)));
+}
+
+void Application::doConnections()
+{
+    if(currentUser->isAdmin()){
+        connect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+        //connect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
+        //connect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
+
+        connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+        connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
+
+        connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
+        //connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+
+
+    }else{
+        connect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+        connect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
+        connect(this, &Application::onSignOut, &userWindow, &UserWindow::hideWindow);
+
+        connect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+
+        connect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
+    }
+}
+
+void Application::undoConnections()
+{
+    if(currentUser->isAdmin()){
+        disconnect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+        //disconnect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
+        //disconnect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
+
+        disconnect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+        disconnect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
+
+        disconnect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
+        disconnect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+    }else{
+        disconnect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+        disconnect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
+        disconnect(this, &Application::onSignOut, &userWindow, &UserWindow::hideWindow);
+
+        disconnect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+
+        disconnect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
+    }
 }
 
 void Application::addUser(const User &user)
