@@ -11,6 +11,10 @@ MCQ::MCQ(const MCQ &mcq): title(mcq.title), grades(mcq.grades)
     }
 }
 
+std::string MCQ::getTitle() const{return title;}
+
+std::map<const std::string, const int> MCQ::getGrades() const{return grades;}
+
 void MCQ::addQuestion(const QCMpp::Question &q){
     questions.push_back(std::unique_ptr<Question>(new Question(q)));
 }
@@ -52,10 +56,6 @@ void MCQ::toJSON(nlohmann::json &data) const
     data.push_back(mcq);
 }
 
-std::string MCQ::getTitle() const
-{
-    return title;
-}
 
 std::ostream &operator<<(std::ostream &os, const MCQ &mcq)
 {

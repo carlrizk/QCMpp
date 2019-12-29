@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Profile</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_username">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Welcome!</string>
+    <string/>
    </property>
   </widget>
   <widget class="QComboBox" name="mcq_alreadyCreated">
@@ -82,19 +82,6 @@
     <string>Users</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="hide_users">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>220</y>
-     <width>151</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Hide</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="sign_out">
    <property name="geometry">
     <rect>
@@ -106,6 +93,19 @@
    </property>
    <property name="text">
     <string>Sign Out</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="promote">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>190</y>
+     <width>151</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Promote</string>
    </property>
   </widget>
  </widget>
