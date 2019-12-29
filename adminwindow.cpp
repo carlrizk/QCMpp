@@ -127,7 +127,12 @@ void QCMpp::AdminWindow::on_sign_out_clicked()
 }
 
 
-
-
 }
 
+
+void QCMpp::AdminWindow::on_promote_clicked()
+{
+    QList<QTableWidgetItem *> row = ui->table->selectedItems();
+    std::string username = row[0]->text().toStdString();
+    emit onPromoteUser(username);
+}
