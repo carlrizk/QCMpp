@@ -24,7 +24,8 @@ SOURCES += \
     main.cpp \
     mcq.cpp \
     question.cpp \
-    user.cpp
+    user.cpp \
+    userwindow.cpp
 
 HEADERS += \
     admin_ui.h \
@@ -35,13 +36,15 @@ HEADERS += \
     loginwindow.h \
     mcq.h \
     question.h \
-    user.h
+    user.h \
+    userwindow.h
 
 
 FORMS += \
-
     admin_ui.ui \
-    loginwindow.ui
+    loginwindow.ui \
+    userwindow.ui
+
 
 
 # Default rules for deployment.

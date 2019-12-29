@@ -4,18 +4,37 @@
 #include "json.hpp"
 #include "encrypter.h"
 
-#include <iostream>
-
 namespace QCMpp {
 
 Application::Application(const std::string &data_path): data_path(data_path), currentUser(nullptr)
 {
     LoadData();
 
-    loginWindow.show(users.size() == 0);
-    connect(&loginWindow, &LoginWindow::onSignInSubmit, this, &Application::onSignInSubmit);
-    connect(&loginWindow, &LoginWindow::onSignUpSubmit, this, &Application::onSignUpSubmit);
-    connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::close);
+    connect(this, &Application::onApplicationStart, &loginWindow, &LoginWindow::showWindow);
+
+    connect(&loginWindow, &LoginWindow::onSignInSubmit, this, &Application::signInSlot);
+    connect(&loginWindow, &LoginWindow::onSignUpSubmit, this, &Application::signUpSlot);
+
+    connect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
+    //connect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+    connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::hideWindow);
+    connect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
+
+    connect(this, &Application::onSignOut, &userWindow, &UserWindow::hideWindow);
+    connect(this, &Application::onSignOut, &loginWindow, &LoginWindow::show);
+
+    connect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+    //connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+
+    //connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
+
+    connect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
+    //connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
+
+    //connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+
+    emit onApplicationStart(users.size() == 0);
 }
 
 Application::~Application()
@@ -23,7 +42,7 @@ Application::~Application()
     SaveData();
 }
 
-void Application::onSignInSubmit(const std::string &username, const std::string &password)
+void Application::signInSlot(const std::string &username, const std::string &password)
 {
     User user(username, password);
     if(!userExist(user)){
@@ -36,7 +55,7 @@ void Application::onSignInSubmit(const std::string &username, const std::string 
     }
     signIn(user);
 }
-void Application::onSignUpSubmit(const std::string &username, const std::string &password)
+void Application::signUpSlot(const std::string &username, const std::string &password)
 {
     User user(username, password, users.size() == 0);
     if(username.length() <= 3){
@@ -54,12 +73,31 @@ void Application::onSignUpSubmit(const std::string &username, const std::string 
     addUser(user);
     signIn(user);
 }
+void Application::signOutSlot()
+{
+    signOut();
+}
+
+void Application::requestUsersSlot()
+{
+    emit onSendUsers(users);
+}
+void Application::requestMCQsSlot()
+{
+    emit onSendMCQs(mcqs);
+}
 
 void Application::signIn(const User &user)
 {
     currentUser = getUser(user);
     emit onSignIn(currentUser);
 }
+void Application::signOut()
+{
+    currentUser = nullptr;
+    emit onSignOut();
+}
+
 void Application::addUser(const User &user)
 {
     users[user.getUsername()] = std::unique_ptr<User>(new User(user));

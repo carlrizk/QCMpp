@@ -25,8 +25,9 @@ signals:
     void onSignUpSubmit(const std::string & username, const std::string & password);
 
 public slots:
-    void show(bool sign_up_only = false);
+    void showWindow(bool sign_up_only = false);
     void setMessage(const std::string & message);
+    void hideWindow();
 
 private slots:
     void on_button_signin_clicked();
@@ -37,5 +38,6 @@ private:
 
     void reset() const;
 };
+
 }
 #endif // LOGINWINDOW_H
