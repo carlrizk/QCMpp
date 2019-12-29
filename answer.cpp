@@ -11,4 +11,22 @@ std::string Answer::getText() const
     return text;
 }
 
+std::ostream &Answer::toOstream(std::ostream &os) const
+{
+    return os << text;
+}
+
+void Answer::toJSON(nlohmann::json &data) const
+{
+    nlohmann::json ans;
+    ans["Answer"] = text;
+    ans["Correct"] = correct;
+    data.push_back(ans);
+}
+
+std::ostream &operator<<(std::ostream &os, const Answer &answ)
+{
+    return answ.toOstream(os);
+}
+
 }
