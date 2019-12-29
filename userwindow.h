@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "user.h"
+#include "mcq.h"
 
 namespace Ui {
 class UserWindow;
@@ -20,10 +21,12 @@ public:
 
 signals:
     void onSignOutSubmit();
+    void onRequestMCQs();
 
 public slots:
     void showWindow(User * const user);
     void hideWindow();
+    void updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
 
 private slots:
     void on_button_signout_clicked();
@@ -31,7 +34,8 @@ private slots:
 private:
     Ui::UserWindow *ui;
 
-    void reset() const;
+    User* currentUser;
+    void reset();
 };
 }
 

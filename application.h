@@ -35,8 +35,8 @@ signals:
     void onApplicationStart(bool first_start = false);
     void onSignIn(User * const user);
     void onSignOut();
-    void onRequestMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
-    void onRequestUsers(const std::map<std::string, std::unique_ptr<User>> & users);
+    void onSendMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
+    void onSendUsers(const std::map<std::string, std::unique_ptr<User>> & users);
 
 private:
     const std::string data_path;
