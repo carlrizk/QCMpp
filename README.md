@@ -19,7 +19,7 @@ QCM++ project
 
     "MCQs": [
         {
-            "Name" : NAME,
+            "Title" : NAME,
             "Questions" : [
                 {
                     "Question" : QUESTION,
