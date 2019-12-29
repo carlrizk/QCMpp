@@ -41,6 +41,14 @@ int MCQ::getGrade(const std::string & username) const
 {
     return grades.at(username);
 }
+bool MCQ::hasGrade(const std::string &username) const
+{
+    if (grades.find(username) == grades.end() )
+    {
+        return false;
+    }
+    return true;
+}
 const std::map<const std::string, const int>* MCQ::getGrades() const{
     return &grades;
 }

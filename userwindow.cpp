@@ -41,7 +41,12 @@ void UserWindow::hideWindow()
 void UserWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ> > &mcqs)
 {
     ui->table_mcqs->clearContents();
-
+    for(size_t i = 0; i < mcqs.size(); ++i){
+        ui->table_mcqs->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(mcqs[i]->getTitle())));
+        if(mcqs[i]->hasGrade(currentUser->getUsername())){
+            ui->table_mcqs->setItem(i, 0, new QTableWidgetItem(mcqs[i]->getGrade(currentUser->getUsername())));
+        }
+    }
 }
 
 void UserWindow::reset()

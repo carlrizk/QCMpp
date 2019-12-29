@@ -45,11 +45,11 @@ void Application::signInSlot(const std::string &username, const std::string &pas
 void Application::signUpSlot(const std::string &username, const std::string &password)
 {
     User user(username, password, users.size() == 0);
-    if(username.length() <= 3){
+    if(username.length() < 3){
         loginWindow.setMessage("Username must be at least 3 characters long.");
         return;
     }
-    if(password.length() <= 3){
+    if(password.length() < 3){
         loginWindow.setMessage("Password must be at least 3 characters long.");
         return;
     }
