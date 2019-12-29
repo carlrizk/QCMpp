@@ -24,7 +24,7 @@ void AdminWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs){
     this->mcqs = &mcqs;
     QStringList titles;
     for(auto & mcq : mcqs){
-       this->ui->mcq_alreadyCreated->addItem(QString::fromStdString(mcq->getTitle()));
+       //this->ui->mcq_alreadyCreated->addItem(QString::fromStdString(mcq->getTitle()));
     }
 }
 
@@ -44,7 +44,7 @@ void AdminWindow::on_mcq_alreadyCreated_currentIndexChanged(int index)
     QList<QString> labels = {"User","Grade"};
     this->ui->table->setHorizontalHeaderLabels(labels);
 
-    insert_grades((*mcqs)[index]->getGrades());
+    //insert_grades((*mcqs)[index]->getGrades());
 }
 
 void AdminWindow::insert_grades(std::map<const std::string,const int> u_g)
