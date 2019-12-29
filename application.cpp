@@ -175,7 +175,7 @@ void Application::LoadMCQs(const nlohmann::json &json)
 
 }
 
-void Application::SaveMCQs(nlohmann::json &accounts_data) const
+void Application::SaveMCQs(nlohmann::json &mcqs_data) const
 {
 
 }

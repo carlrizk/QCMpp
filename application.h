@@ -65,7 +65,7 @@ private:
     void SaveUsers(nlohmann::json & accounts_data) const;
 
     void LoadMCQs(const nlohmann::json & json);
-    void SaveMCQs(nlohmann::json & accounts_data) const;
+    void SaveMCQs(nlohmann::json & mcqs_data) const;
 };
 }
 #endif // APPLICATION_H
