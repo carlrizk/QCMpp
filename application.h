@@ -21,7 +21,7 @@ class Application : public QObject
     Q_OBJECT
 
 public:
-    Application(const std::string & configuration_path);
+    Application(const std::string & data_path);
 
     ~Application();
 
