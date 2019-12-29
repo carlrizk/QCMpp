@@ -12,6 +12,7 @@
 
 #include "loginwindow.h"
 #include "userwindow.h"
+#include "adminwindow.h"
 
 namespace QCMpp {
 
@@ -46,6 +47,7 @@ private:
 
     LoginWindow loginWindow;
     UserWindow userWindow;
+    AdminWindow adminWindow;
 
     User* currentUser;
     void addUser(const User & user);
@@ -56,6 +58,9 @@ private:
     void signOut();
 
     void addMCQ(const MCQ & mcq);
+
+    void doConnections();
+    void undoConnections();
 
     void LoadData();
     void SaveData() const;
