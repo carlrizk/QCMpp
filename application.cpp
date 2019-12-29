@@ -10,7 +10,8 @@ Application::Application(const std::string &configuration_path): currentUser(nul
 
     loginWindow.show();
     connect(&loginWindow, &LoginWindow::onSignInSubmit, this, &Application::onSignInSubmit);
-
+    connect(&loginWindow, &LoginWindow::onSignUpSubmit, this, &Application::onSignUpSubmit);
+    connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::hide);
 }
 
 Application::~Application()
@@ -28,7 +29,7 @@ void Application::onSignInSubmit(const std::string &username, const std::string 
     if(!getUser(user)->matchPassword(password)){
         loginWindow.setMessage("Wrong password.");
     }
-    login(user);
+    signIn(user);
 }
 
 void Application::onSignUpSubmit(const std::string &username, const std::string &password)
@@ -47,13 +48,13 @@ void Application::onSignUpSubmit(const std::string &username, const std::string 
         return;
     }
     addUser(user);
-    login(user);
+    signIn(user);
 }
 
-void Application::login(const User &user)
+void Application::signIn(const User &user)
 {
     currentUser = getUser(user);
-    emit onLogin(currentUser);
+    emit onSignIn(currentUser);
 }
 void Application::addUser(const User &user)
 {
