@@ -8,7 +8,6 @@ bool User::isAdmin() const
 {
     return admin;
 }
-
 void User::setAdmin(bool admin)
 {
     this->admin = admin;
@@ -24,20 +23,9 @@ bool User::matchPassword(const std::string &pass)
     return pass == password;
 }
 
-std::ostream &User::toOstream(std::ostream &os) const
-{
-    os << "Username: " << username << " , admin: " << admin;
-    return os;
-}
-
 void User::toJSON(nlohmann::json &data) const
 {
     data[username] = { {"password", password}, {"admin", admin} };
-}
-
-std::ostream &operator<<(std::ostream &os, const User &user)
-{
-        return user.toOstream(os);
 }
 
 }

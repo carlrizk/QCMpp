@@ -2,51 +2,50 @@
 
 namespace QCMpp {
 
-MCQ::MCQ(const std::string &title) : title(title){}
+MCQ::MCQ(const std::string &title) :
+    title(title){}
 
-MCQ::MCQ(const MCQ &mcq): title(mcq.title), grades(mcq.grades)
+MCQ::MCQ(const MCQ &mcq):
+    title(mcq.title), grades(mcq.grades)
 {
     for(auto& question: mcq.questions){
         addQuestion(Question(*question));
     }
 }
 
-std::string MCQ::getTitle() const{return title;}
-
-//int MCQ::getGrade(const std::string & username) const
-//{
-//    return grades.at(username);
-//}
-
-std::map<const std::string, const int> const * MCQ::getGrades() const{
-    return &grades;
-}
-
 void MCQ::addQuestion(const QCMpp::Question &q){
     questions.push_back(std::unique_ptr<Question>(new Question(q)));
 }
+void MCQ::addGrade(const std::string & username, const int grade){
+    grades.insert({username, grade});
+}
 
-int MCQ::isCorrect(const std::vector<std::vector<bool> > &u_Answers) const{
+int MCQ::correct(const std::vector<std::vector<bool> > &u_Answers) const{
     int right_a(0);
     size_t n_questions = questions.size();
     for(size_t i(0); i< n_questions; ++i){
-        if(questions[i]->isCorrect(u_Answers[i]) == true)
+        if(questions[i]->isCorrect(u_Answers[i]))
             ++right_a;
     }
     return right_a/n_questions;
 }
 
-void MCQ::addGrade(const std::string & username,const int grade){
-    grades.insert({username, grade});
+std::string MCQ::getTitle() const{
+    return title;
 }
 
-std::ostream &MCQ::toOstream(std::ostream &os) const
+const Question * MCQ::getQuestion(int id) const
 {
-    os << title;
-    for(auto& quest : questions){
-        os << *quest;
-    }
-    return os;
+    return questions.at(id).get();
+}
+
+int MCQ::getGrade(const std::string & username) const
+{
+    return grades.at(username);
+}
+
+const std::map<const std::string, const int>* MCQ::getGrades() const{
+    return &grades;
 }
 
 void MCQ::toJSON(nlohmann::json &data) const
@@ -61,12 +60,6 @@ void MCQ::toJSON(nlohmann::json &data) const
         mcq["Passed Students"][it->first] = it->second;
     }
     data.push_back(mcq);
-}
-
-
-std::ostream &operator<<(std::ostream &os, const MCQ &mcq)
-{
-    return mcq.toOstream(os);
 }
 
 }

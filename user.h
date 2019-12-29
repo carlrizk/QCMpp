@@ -19,8 +19,6 @@ public:
     std::string getUsername() const;
     bool matchPassword(const std::string & pass);
 
-    std::ostream& toOstream(std::ostream& os)const;
-
     void toJSON(nlohmann::json & data) const;
 
 private:
@@ -28,8 +26,6 @@ private:
     const std::string password; //Encrypted
     bool admin;
 };
-
-std::ostream& operator<<(std::ostream& os, const User& user);
 
 }
 #endif // USER_H
