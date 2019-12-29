@@ -30,7 +30,7 @@ public slots:
     //void updateUsers(const std::)
 
 signals:
- //   void onPromoteUser(const std::string & username);
+    void onPromoteUser(const std::string & username);
 
     void onRequestMCQs();
 
