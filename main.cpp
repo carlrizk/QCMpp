@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "admin_ui.h"
+#include "adminwindow.h"
 
 #include "application.h"
 
