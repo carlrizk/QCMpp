@@ -1,8 +1,11 @@
 #ifndef QUESTION_H
 #define QUESTION_H
-#include "answer.h"
+
 #include <vector>
 #include <memory>
+
+#include "answer.h"
+
 
 namespace QCMpp{
 class Question
@@ -12,9 +15,9 @@ public:
 
     Question(const Question& q);
 
-    void add_answer(const Answer & a);
+    void addAnswer(const Answer & a);
 
-    bool correct(const std::vector<bool> u_Answers) const;
+    bool isCorrect(const std::vector<bool> u_Answers) const;
     //Checks if user's choices are correct
     //Vector could contain 0s and 1s, treated as bool
 

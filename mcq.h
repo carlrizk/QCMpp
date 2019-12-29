@@ -13,11 +13,11 @@ class MCQ
 public:
     MCQ(const std::string & title);
 
-    void add_question(const Question & q);
+    void addQuestion(const Question & q);
 
-    int correct(const std::vector<std::vector<bool>> & u_Answers) const;
+    int isCorrect(const std::vector<std::vector<bool>> & u_Answers) const;
     
-    void add_grade(const User & u,const int grade);
+    void addGrade(const User & u,const int grade);
 
 private:
     const std::string title;
