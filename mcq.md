@@ -18,7 +18,7 @@ MCQ(const std::string & title);
 >Checks if the user's answers to the MCQ are correct
 
 >```cpp
->void add_grade(const User & u, int grade);
+>void add_grade(const User & u,const int grade);
 >```
 >Adds a user's grade
 
