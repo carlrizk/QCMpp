@@ -19,9 +19,9 @@ QCM++ project
 
     "MCQs": [
         {
+            "Name" : NAME,
             "Questions" : [
                 {
-                    "Name" : NAME,
                     "Question" : QUESTION,
                     "Answers" : [
                         {
