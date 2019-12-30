@@ -31,7 +31,7 @@ public slots:
     void hideWindow();
 
 signals:
-    void onPromoteUser(const std::string & username);
+    void onRequestChangeRank(const std::string & username, bool isAdmin);
 
     void onRequestMCQs();
 

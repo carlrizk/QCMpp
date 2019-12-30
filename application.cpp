@@ -86,6 +86,12 @@ void Application::requestMCQsSlot()
     emit onSendMCQs(mcqs);
 }
 
+void Application::requestRankChangeSlot(const string &username, bool isAdmin)
+{
+    users[username]->setAdmin(!isAdmin);
+    emit onSendUsers(users);
+}
+
 void Application::signIn(const User &user)
 {
     currentUser = getUser(user);
@@ -114,6 +120,7 @@ void Application::doConnections()
 
         connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
         connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
+        connect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
 
         connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
         connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
@@ -144,6 +151,8 @@ void Application::undoConnections()
 
         disconnect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
         disconnect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+
+        disconnect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
 
     }else{
         disconnect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);

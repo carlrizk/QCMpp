@@ -101,13 +101,11 @@ void QCMpp::AdminWindow::on_table_itemSelectionChanged()
 
 }
 
-
-
 void QCMpp::AdminWindow::on_button_changerank_clicked()
 {
     QList<QTableWidgetItem *> row = ui->table->selectedItems();
     std::string username = row[0]->text().toStdString();
-    emit onPromoteUser(username);
+    emit onRequestChangeRank(username,(row[1]->text().toStdString()=="Admin") ? true:false);
     ui->button_changerank->hide();
 }
 

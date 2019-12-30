@@ -31,6 +31,7 @@ public slots:
     void signOutSlot();
     void requestUsersSlot();
     void requestMCQsSlot();
+    void requestRankChangeSlot(const std::string & username, bool isAdmin);
 
 signals:
     void onApplicationStart(bool first_start = false);
