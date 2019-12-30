@@ -51,9 +51,11 @@ private slots:
 
     void on_button_signout_clicked();
 
-    void on_button_promote_clicked();
+    void on_button_changerank_clicked();
 
     void on_button_tomcqs_clicked();
+
+    void on_table_itemSelectionChanged();
 
 private:
     Ui::AdminWindow *ui;

@@ -113,7 +113,7 @@
     <string>Sign Out</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_promote">
+  <widget class="QPushButton" name="button_changerank">
    <property name="geometry">
     <rect>
      <x>240</x>
