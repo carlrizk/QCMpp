@@ -22,6 +22,7 @@ public:
 
 signals:
     void onSignOutSubmit();
+    void onTakeMCQSubmit(int mcq_id);
     void onRequestMCQs();
 
 public slots:
@@ -31,6 +32,9 @@ public slots:
 
 private slots:
     void on_button_signout_clicked();
+    void on_table_mcqs_itemSelectionChanged();
+
+    void on_button_take_clicked();
 
 private:
     Ui::UserWindow *ui;

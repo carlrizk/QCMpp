@@ -54,6 +54,7 @@ void UserWindow::reset()
     currentUser = nullptr;
     ui->label_username->clear();
     ui->table_mcqs->clearContents();
+    ui->button_take->setEnabled(false);
 }
 
 void UserWindow::setTableCell(int row, int column, const std::string &string, QTableWidget &table)
@@ -66,6 +67,22 @@ void UserWindow::setTableCell(int row, int column, const std::string &string, QT
 void QCMpp::UserWindow::on_button_signout_clicked()
 {
     emit onSignOutSubmit();
+}
+
+void QCMpp::UserWindow::on_table_mcqs_itemSelectionChanged()
+{
+    auto selected = ui->table_mcqs->selectedItems();
+    if(selected.isEmpty()) return;
+    if(!selected[1]->text().isEmpty()){
+        ui->button_take->setEnabled(false);
+    }else{
+        ui->button_take->setEnabled(true);
+    }
+}
+
+void QCMpp::UserWindow::on_button_take_clicked()
+{
+    emit onTakeMCQSubmit(ui->table_mcqs->currentRow());
 }
 
 }
