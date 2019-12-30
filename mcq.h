@@ -26,7 +26,7 @@ public:
     const Question *getQuestion(int id) const;
     int getGrade(const std::string & username) const;
     bool hasGrade(const std::string & username) const;
-    const std::map<const std::string, const int> * getGrades() const ; //To Be Removed
+    const std::map<const std::string, const int> * getGrades() const ;
 
     void toJSON(nlohmann::json & data) const;
 

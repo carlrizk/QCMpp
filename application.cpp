@@ -22,6 +22,18 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
     connect(this, &Application::onSignOut, &loginWindow, &LoginWindow::show);
 
     emit onApplicationStart(users.size() == 0);
+
+//    MCQ mcq("MCQ#1");
+//    MCQ mcq2("MCQ#2");
+//    Question question("Question");
+//    mcq.addQuestion(question);
+//    mcq.addGrade("stu", 96);
+//    mcq.addGrade("georges", 69);
+//    mcq2.addQuestion(question);
+//    mcq2.addGrade("georges", 69);
+
+//    addMCQ(mcq);
+//    addMCQ(mcq2);
 }
 
 Application::~Application()

@@ -56,11 +56,10 @@ private slots:
 private:
     Ui::AdminWindow *ui;
 
-    void insert_grades(std::map<const std::string,const int> u_g);
+    void insert_grades(const std::map<const std::string, const int> & u_g);
+//    void insert_users(std::map<const std::string, bool> & u_r);
 
-    void create_mcq();
-
-    void insert_users(std::map<const std::string,bool> u_r);
+    //void create_mcq();
 
     const std::vector<std::unique_ptr<MCQ>> * mcqs;
 };

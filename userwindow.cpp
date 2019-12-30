@@ -41,10 +41,11 @@ void UserWindow::hideWindow()
 void UserWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ> > &mcqs)
 {
     ui->table_mcqs->clearContents();
+    ui->table_mcqs->setRowCount(mcqs.size());
     for(size_t i = 0; i < mcqs.size(); ++i){
         ui->table_mcqs->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(mcqs[i]->getTitle())));
         if(mcqs[i]->hasGrade(currentUser->getUsername())){
-            ui->table_mcqs->setItem(i, 0, new QTableWidgetItem(mcqs[i]->getGrade(currentUser->getUsername())));
+            ui->table_mcqs->setItem(i, 1, new QTableWidgetItem(QString::number(mcqs[i]->getGrade(currentUser->getUsername()))));
         }
     }
 }
