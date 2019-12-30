@@ -43,10 +43,9 @@ void UserWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ> > &mcqs)
     ui->table_mcqs->clearContents();
     ui->table_mcqs->setRowCount(mcqs.size());
     for(size_t i = 0; i < mcqs.size(); ++i){
-        ui->table_mcqs->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(mcqs[i]->getTitle())));
-        if(mcqs[i]->hasGrade(currentUser->getUsername())){
-            ui->table_mcqs->setItem(i, 1, new QTableWidgetItem(QString::number(mcqs[i]->getGrade(currentUser->getUsername()))));
-        }
+        setTableCell(i, 0 , mcqs[i]->getTitle(), *ui->table_mcqs);
+        bool hasGrade = mcqs[i]->hasGrade(currentUser->getUsername());
+        setTableCell(i, 1 , (hasGrade) ? std::to_string(mcqs[i]->getGrade(currentUser->getUsername())) : "", *ui->table_mcqs);
     }
 }
 
@@ -55,6 +54,13 @@ void UserWindow::reset()
     currentUser = nullptr;
     ui->label_username->clear();
     ui->table_mcqs->clearContents();
+}
+
+void UserWindow::setTableCell(int row, int column, const std::string &string, QTableWidget &table)
+{
+    auto cell = new QTableWidgetItem(QString::fromStdString(string));
+    cell->setFlags(cell->flags() &  ~Qt::ItemIsEditable);
+    table.setItem(row, column, cell );
 }
 
 void QCMpp::UserWindow::on_button_signout_clicked()

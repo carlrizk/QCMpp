@@ -2,6 +2,7 @@
 #define USERWINDOW_H
 
 #include <QWidget>
+#include <QTableWidget>
 #include "user.h"
 #include "mcq.h"
 
@@ -36,6 +37,7 @@ private:
 
     User* currentUser;
     void reset();
+    void setTableCell(int row, int column, const std::string & string,  QTableWidget & table);
 };
 }
 
