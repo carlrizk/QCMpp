@@ -8,11 +8,11 @@ namespace QCMpp {
 
 AdminWindow::AdminWindow(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::AdminWindow)
+    ui(new Ui::AdminWindow),
+    requestUsers(false)
 {
     ui->setupUi(this);
     ui->button_promote->hide();
-//    emit onRequestMCQs();
 }
 
 AdminWindow::~AdminWindow()
@@ -22,10 +22,6 @@ AdminWindow::~AdminWindow()
 
 void AdminWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs){
     this->mcqs = &mcqs;
-//    QStringList titles;
-//    for(auto & mcq : mcqs){
-//       this->ui->combobox_mcqs->addItem(QString::fromStdString(mcq->getTitle()));
-//    }
     for(auto & mcq : mcqs){
            this->ui->combobox_mcqs->addItem(QString::fromStdString(mcq->getTitle()));
     }
@@ -40,13 +36,7 @@ void AdminWindow::on_combobox_mcqs_currentIndexChanged(int index)
 {
     if(index < 0) return; //Prevents crash when clearing
     //Preparing the table
-    ui->button_promote->hide();
-    ui->button_users->show();
     this->ui->table->clearContents();
-//    this->ui->table->removeColumn(1);
-//    this->ui->table->insertColumn(1);
-    QList<QString> labels = {"User","Grade"};
-    this->ui->table->setHorizontalHeaderLabels(labels);
 
     insert_grades(*(*mcqs)[index]->getGrades());
 }
@@ -55,11 +45,6 @@ void AdminWindow::insert_grades(const std::map<const std::string, const int> & u
 {
     int row = 0;
     this->ui->table->setRowCount(u_g.size());
-//    for(std::map<const std::string,const int>::iterator it(u_g.begin());it!=u_g.end();++it){
-//        this->ui->table->setItem(row,0,new QTableWidgetItem(QString::fromStdString(it->first)));
-//        this->ui->table->setItem(row,1,new QTableWidgetItem(it->second));
-//        ++row;
-//    }
     for(auto it(u_g.begin()); it!=u_g.end(); ++it){
         this->ui->table->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(it->first)));
         this->ui->table->setItem(row, 1, new QTableWidgetItem(QString::number(it->second)));
@@ -71,10 +56,10 @@ void AdminWindow::on_button_users_clicked()
 {
     //Preparing Window and table
     ui->button_users->hide();
+    ui->button_createmcq->hide();
     ui->button_promote->show();
+    ui->button_tomcqs->show();
     this->ui->table->clearContents();
-//    this->ui->table->removeColumn(1);
-//    this->ui->table->insertColumn(1);
     QList<QString> labels = {"User","Rank"};
     this->ui->table->setHorizontalHeaderLabels(labels);
 
@@ -83,11 +68,6 @@ void AdminWindow::on_button_users_clicked()
 
 void AdminWindow::updateUsers(const std::map<std::string, std::unique_ptr<User>> & users)
 {
-//    std::map<const std::string, bool> u_r;
-//    for (auto it = users.begin(); it != users.end(); ++it) {
-//        u_r.insert({it->first, it->second->isAdmin()});
-//    }
-    //insert_users(u_r);
     this->ui->table->setRowCount(users.size());
     int i =0;
     for (auto it = users.begin(); it != users.end(); ++it) {
@@ -98,29 +78,23 @@ void AdminWindow::updateUsers(const std::map<std::string, std::unique_ptr<User>>
 
 }
 
-//void AdminWindow::insert_users(std::map<const std::string,bool> u_r)
-//{
-//    int row = 0;
-//    for(std::map<const std::string,bool>::iterator it(u_r.begin()); it != u_r.end(); ++it){
-//        if (row > this->ui->table->rowCount()){
-//            this->ui->table->insertRow(row);
-//        }
-//        this->ui->table->setItem(row,0,new QTableWidgetItem(QString::fromStdString(it->first)));
-//        if (it->second == true){
-//            this->ui->table->setItem(row,1,new QTableWidgetItem("Admin"));
-//        }else{
-//            this->ui->table->setItem(row,1,new QTableWidgetItem("Student"));
-//        }
-//        ++row;
-//    }
-//    this->ui->table->setRowCount(row);
-//}
-
 void QCMpp::AdminWindow::on_button_promote_clicked()
 {
     QList<QTableWidgetItem *> row = ui->table->selectedItems();
+    row[1]->setText("Admin");
     std::string username = row[0]->text().toStdString();
     emit onPromoteUser(username);
+}
+
+void QCMpp::AdminWindow::on_button_tomcqs_clicked()
+{
+    ui->button_promote->hide();
+    ui->button_tomcqs->hide();
+    ui->button_users->show();
+    ui->button_createmcq->show();
+    ui->table->clearContents();
+    QList<QString> labels = {"User","Grade"};
+    ui->table->setHorizontalHeaderLabels(labels);
 }
 
 
@@ -143,3 +117,4 @@ void QCMpp::AdminWindow::hideWindow(){
 }
 
 }
+
