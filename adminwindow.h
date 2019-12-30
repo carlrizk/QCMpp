@@ -60,13 +60,16 @@ private slots:
 private:
     Ui::AdminWindow *ui;
 
+    User* currentUser;
+
+    bool requestUsers;
+
     void insert_grades(const std::map<const std::string, const int> & u_g);
 
     const std::vector<std::unique_ptr<MCQ>> * mcqs;
 
-    bool requestUsers;
-
     void setTableCell(const int row, const int column, const std::string & string);
+
 };
 
 }
