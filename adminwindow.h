@@ -65,6 +65,8 @@ private:
     const std::vector<std::unique_ptr<MCQ>> * mcqs;
 
     bool requestUsers;
+
+    void setTableCell(const int row, const int column, const std::string & string);
 };
 
 }
