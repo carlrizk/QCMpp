@@ -41,7 +41,7 @@
     <enum>Qt::SolidLine</enum>
    </property>
    <property name="sortingEnabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="columnCount">
     <number>2</number>
@@ -69,6 +69,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="button_take">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>314</x>
