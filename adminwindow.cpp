@@ -46,12 +46,16 @@ void AdminWindow::insert_grades(const std::map<const std::string, const int> & u
     int row = 0;
     this->ui->table->setRowCount(u_g.size());
     for(auto it(u_g.begin()); it!=u_g.end(); ++it){
-        this->ui->table->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(it->first)));
-        ui->table->item(row,0)->setFlags(ui->table->item(row,0)->flags() & ~Qt::ItemIsEditable);
-        this->ui->table->setItem(row, 1, new QTableWidgetItem(QString::number(it->second)));
-        ui->table->item(row,1)->setFlags(ui->table->item(row,1)->flags() & ~Qt::ItemIsEditable);
+        setTableCell(row,0, it->first);
+        setTableCell(row,1,std::to_string(it->second));
         ++row;
     }
+}
+
+void AdminWindow::setTableCell(const int row, const int column, const std::string & string)
+{
+    this->ui->table->setItem(row, column, new QTableWidgetItem(QString::fromStdString(string)));
+    ui->table->item(row,column)->setFlags(ui->table->item(row,column)->flags() & ~Qt::ItemIsEditable);
 }
 
 void AdminWindow::on_button_users_clicked()
@@ -74,10 +78,8 @@ void AdminWindow::updateUsers(const std::map<std::string, std::unique_ptr<User>>
     this->ui->table->setRowCount(users.size());
     int row =0;
     for (auto it = users.begin(); it != users.end(); ++it) {
-        ui->table->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(it->first)));
-        ui->table->item(row,0)->setFlags(ui->table->item(row,0)->flags() & ~Qt::ItemIsEditable);
-        ui->table->setItem(row, 1, new QTableWidgetItem(QString::fromStdString((it->second->isAdmin()) ? "Admin" : "Student")));
-        ui->table->item(row,1)->setFlags(ui->table->item(row,1)->flags() & ~Qt::ItemIsEditable);
+        setTableCell(row,0,it->first);
+        setTableCell(row,1,(it->second->isAdmin()) ? "Admin" : "Student");
         ++row;
     }
 
@@ -99,13 +101,11 @@ void QCMpp::AdminWindow::on_table_itemSelectionChanged()
 
 }
 
-
-
 void QCMpp::AdminWindow::on_button_changerank_clicked()
 {
     QList<QTableWidgetItem *> row = ui->table->selectedItems();
     std::string username = row[0]->text().toStdString();
-    emit onPromoteUser(username);
+    emit onRequestChangeRank(username,(row[1]->text().toStdString()=="Admin") ? true:false);
     ui->button_changerank->hide();
 }
 
