@@ -89,13 +89,16 @@ void QCMpp::AdminWindow::on_table_itemSelectionChanged()
 {
     if(requestUsers){
         int row = ui->table->currentItem()->row();
-        ui->button_changerank->show();
+
         std::string username = ui->table->item(row,0)->text().toStdString();
         std::string rank = ui->table->item(row,1)->text().toStdString();
-        if(rank == "Admin"){
-            ui->button_changerank->setText("Demote");
-        }else{
-            ui->button_changerank->setText("Promote");
+        if(username != currentUser->getUsername()){
+            ui->button_changerank->show();
+            if(rank == "Admin"){
+                ui->button_changerank->setText("Demote");
+            }else{
+                ui->button_changerank->setText("Promote");
+            }
         }
     }
 
@@ -130,6 +133,7 @@ void QCMpp::AdminWindow::on_button_signout_clicked()
 }
 
 void QCMpp::AdminWindow::showWindow(User * const user){
+    currentUser = user;
     setWindowTitle(QString::fromStdString("Logged in as "+ user->getUsername()+" (Admin)"));
     this->ui->label_username->setText(QString::fromStdString(user->getUsername()));
     show();
