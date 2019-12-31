@@ -24,22 +24,91 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
     emit onApplicationStart(users.size() == 0);
 
 //    MCQ mcq("MCQ#1");
-//    MCQ mcq2("MCQ#2");
 //    Question question("Question");
+//    question.addAnswer(Answer("Answer#1", true));
+//    question.addAnswer(Answer("Answer#2", false));
 //    mcq.addQuestion(question);
-//    mcq.addGrade("stu", 96);
-//    mcq.addGrade("georges", 69);
-//    mcq2.addQuestion(question);
-//    mcq2.addGrade("georges", 69);
 
 //    addMCQ(mcq);
-//    addMCQ(mcq2);
 }
 
 Application::~Application()
 {
     SaveData();
 }
+
+void Application::doConnections()
+{
+    if(currentUser->isAdmin()){
+        connect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+        connect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
+        connect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
+
+        connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+        connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
+        connect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
+
+        connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
+        connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+
+
+    }else{
+        connect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+        connect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
+        connect(this, &Application::onSignOut, &userWindow, &UserWindow::hideWindow);
+
+        connect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+
+        connect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
+
+        connect(&userWindow, &UserWindow::onTakeMCQSubmit, this, &Application::takeMCQSlot);
+        connect(this, &Application::onTakeMCQ, &mcqWidget, &MCQWidget::showWindow);
+        connect(this, &Application::onTakeMCQ, &userWindow, &UserWindow::hideWindow);
+
+        connect(&mcqWidget, &MCQWidget::onCancelSubmit, this, &Application::cancelMCQSlot);
+        connect(this, &Application::onCancelMCQ, &mcqWidget, &MCQWidget::hideWindow);
+        connect(this, &Application::onCancelMCQ, &userWindow, &UserWindow::showWindow);
+    }
+}
+
+void Application::undoConnections()
+{
+    if(currentUser->isAdmin()){
+        disconnect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+        disconnect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
+        disconnect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
+
+        disconnect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+        disconnect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
+
+        disconnect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
+        disconnect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
+
+        disconnect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
+
+    }else{
+        disconnect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
+
+        disconnect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
+        disconnect(this, &Application::onSignOut, &userWindow, &UserWindow::hideWindow);
+
+        disconnect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
+
+        disconnect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
+
+        disconnect(&userWindow, &UserWindow::onTakeMCQSubmit, this, &Application::takeMCQSlot);
+        disconnect(this, &Application::onTakeMCQ, &mcqWidget, &MCQWidget::showWindow);
+        disconnect(this, &Application::onTakeMCQ, &userWindow, &UserWindow::hideWindow);
+
+        disconnect(&mcqWidget, &MCQWidget::onCancelSubmit, this, &Application::cancelMCQSlot);
+        disconnect(this, &Application::onCancelMCQ, &mcqWidget, &MCQWidget::hideWindow);
+        disconnect(this, &Application::onCancelMCQ, &userWindow, &UserWindow::showWindow);
+    }
+}
+
 
 void Application::signInSlot(const std::string &username, const std::string &password)
 {
@@ -48,7 +117,7 @@ void Application::signInSlot(const std::string &username, const std::string &pas
         loginWindow.setMessage("Username does not exist.");
         return;
     }
-    if(!getUser(user)->matchPassword(password)){
+    if(!getUser(user).matchPassword(password)){
         loginWindow.setMessage("Wrong password.");
         return;
     }
@@ -92,11 +161,22 @@ void Application::requestRankChangeSlot(const string &username, bool isAdmin)
     emit onSendUsers(users);
 }
 
+void Application::cancelMCQSlot()
+{
+    emit onCancelMCQ(*currentUser);
+}
+
+void Application::takeMCQSlot(int mcq_id)
+{
+    const MCQ * mcq = mcqs[mcq_id].get();
+    emit  onTakeMCQ(*currentUser, *mcq);
+}
+
 void Application::signIn(const User &user)
 {
-    currentUser = getUser(user);
+    currentUser = &getUser(user);
     doConnections();
-    emit onSignIn(currentUser);
+    emit onSignIn(*currentUser);
 }
 void Application::signOut()
 {
@@ -110,69 +190,13 @@ void Application::addMCQ(const MCQ &mcq)
     mcqs.push_back(std::unique_ptr<MCQ>(new MCQ(mcq)));
 }
 
-void Application::doConnections()
-{
-    if(currentUser->isAdmin()){
-        connect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
-
-        connect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
-        connect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
-
-        connect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
-        connect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
-        connect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
-
-        connect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
-        connect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
-
-
-    }else{
-        connect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
-
-        connect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
-        connect(this, &Application::onSignOut, &userWindow, &UserWindow::hideWindow);
-
-        connect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
-
-        connect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
-    }
-}
-
-void Application::undoConnections()
-{
-    if(currentUser->isAdmin()){
-        disconnect(&adminWindow, &AdminWindow::onSignOutSubmit, this, &Application::signOutSlot);
-
-        disconnect(this, &Application::onSignIn, &adminWindow, &AdminWindow::showWindow);
-        disconnect(this, &Application::onSignOut, &adminWindow, &AdminWindow::hideWindow);
-
-        disconnect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
-        disconnect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
-
-        disconnect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
-        disconnect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
-
-        disconnect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
-
-    }else{
-        disconnect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
-
-        disconnect(this, &Application::onSignIn, &userWindow, &UserWindow::showWindow);
-        disconnect(this, &Application::onSignOut, &userWindow, &UserWindow::hideWindow);
-
-        disconnect(&userWindow, &UserWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
-
-        disconnect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
-    }
-}
-
 void Application::addUser(const User &user)
 {
     users[user.getUsername()] = std::unique_ptr<User>(new User(user));
 }
-User* Application::getUser(const User &user) const
+const User& Application::getUser(const User &user) const
 {
-    return users.at(user.getUsername()).get();
+    return *users.at(user.getUsername()).get();
 }
 bool Application::userExist(const User &user) const
 {

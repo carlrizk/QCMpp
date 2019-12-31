@@ -27,7 +27,7 @@ void AdminWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs){
     }
 }
 
-void QCMpp::AdminWindow::on_button_createmcq_clicked()
+void AdminWindow::on_button_createmcq_clicked()
 {
     emit onCreateMCQ();
 }
@@ -38,7 +38,7 @@ void AdminWindow::on_combobox_mcqs_currentIndexChanged(int index)
     //Preparing the table
     this->ui->table->clearContents();
 
-    insert_grades(*(*mcqs)[index]->getGrades());
+    insert_grades(mcqs->at(index)->getGrades());
 }
 
 void AdminWindow::insert_grades(const std::map<const std::string, const int> & u_g)
@@ -85,14 +85,14 @@ void AdminWindow::updateUsers(const std::map<std::string, std::unique_ptr<User>>
 
 }
 
-void QCMpp::AdminWindow::on_table_itemSelectionChanged()
+void AdminWindow::on_table_itemSelectionChanged()
 {
     if(requestUsers){
         int row = ui->table->currentItem()->row();
 
         std::string username = ui->table->item(row,0)->text().toStdString();
         std::string rank = ui->table->item(row,1)->text().toStdString();
-        if(username != currentUser->getUsername()){
+        if(username != user->getUsername()){
             ui->button_changerank->show();
             if(rank == "Admin"){
                 ui->button_changerank->setText("Demote");
@@ -104,7 +104,7 @@ void QCMpp::AdminWindow::on_table_itemSelectionChanged()
 
 }
 
-void QCMpp::AdminWindow::on_button_changerank_clicked()
+void AdminWindow::on_button_changerank_clicked()
 {
     QList<QTableWidgetItem *> row = ui->table->selectedItems();
     std::string username = row[0]->text().toStdString();
@@ -112,7 +112,7 @@ void QCMpp::AdminWindow::on_button_changerank_clicked()
     ui->button_changerank->hide();
 }
 
-void QCMpp::AdminWindow::on_button_tomcqs_clicked()
+void AdminWindow::on_button_tomcqs_clicked()
 {
     requestUsers = !requestUsers;
     ui->button_changerank->hide();
@@ -123,24 +123,24 @@ void QCMpp::AdminWindow::on_button_tomcqs_clicked()
     ui->combobox_mcqs->show();
     QList<QString> labels = {"User","Grade"};
     ui->table->setHorizontalHeaderLabels(labels);
-    insert_grades(*(*mcqs)[ui->combobox_mcqs->currentIndex()]->getGrades());
+    insert_grades(mcqs->at(ui->combobox_mcqs->currentIndex())->getGrades());
 }
 
 
-void QCMpp::AdminWindow::on_button_signout_clicked()
+void AdminWindow::on_button_signout_clicked()
 {
     emit onSignOutSubmit();
 }
 
-void QCMpp::AdminWindow::showWindow(User * const user){
-    currentUser = user;
-    setWindowTitle(QString::fromStdString("Logged in as "+ user->getUsername()+" (Admin)"));
-    this->ui->label_username->setText(QString::fromStdString(user->getUsername()));
+void AdminWindow::showWindow(const User & user){
+    this->user = &user;
+    setWindowTitle(QString::fromStdString("Logged in as "+ user.getUsername()+" (Admin)"));
+    this->ui->label_username->setText(QString::fromStdString(user.getUsername()));
     show();
     emit onRequestMCQs();
 }
 
-void QCMpp::AdminWindow::hideWindow(){
+void AdminWindow::hideWindow(){
     ui->combobox_mcqs->clear();
     ui->table->clearContents();
     hide();

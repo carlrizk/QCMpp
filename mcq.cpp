@@ -33,10 +33,7 @@ int MCQ::correct(const std::vector<std::vector<bool> > &u_Answers) const{
 std::string MCQ::getTitle() const{
     return title;
 }
-const Question * MCQ::getQuestion(int id) const
-{
-    return questions.at(id).get();
-}
+
 int MCQ::getGrade(const std::string & username) const
 {
     return grades.at(username);
@@ -49,8 +46,13 @@ bool MCQ::hasGrade(const std::string &username) const
     }
     return true;
 }
-const std::map<const std::string, const int>* MCQ::getGrades() const{
-    return &grades;
+const std::map<const std::string, const int> & MCQ::getGrades() const{
+    return grades;
+}
+
+const std::vector<std::unique_ptr<const Question> > &MCQ::getQuestions() const
+{
+    return questions;
 }
 
 void MCQ::toJSON(nlohmann::json &data) const

@@ -18,7 +18,7 @@ std::string User::getUsername() const
     return username;
 }
 
-bool User::matchPassword(const std::string &pass)
+bool User::matchPassword(const std::string &pass) const
 {
     return pass == password;
 }

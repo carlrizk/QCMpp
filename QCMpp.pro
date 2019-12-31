@@ -23,6 +23,7 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     mcq.cpp \
+    mcqwidget.cpp \
     question.cpp \
     user.cpp \
     userwindow.cpp
@@ -35,6 +36,7 @@ HEADERS += \
     json.hpp \
     loginwindow.h \
     mcq.h \
+    mcqwidget.h \
     question.h \
     user.h \
     userwindow.h
@@ -43,6 +45,7 @@ HEADERS += \
 FORMS += \
     adminwindow.ui \
     loginwindow.ui \
+    mcqwidget.ui \
     userwindow.ui
 
 

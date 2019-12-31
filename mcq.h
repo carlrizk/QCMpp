@@ -23,10 +23,11 @@ public:
     int correct(const std::vector<std::vector<bool>> & u_Answers) const;
     
     std::string getTitle() const;
-    const Question *getQuestion(int id) const;
     int getGrade(const std::string & username) const;
     bool hasGrade(const std::string & username) const;
-    const std::map<const std::string, const int> * getGrades() const ;
+    const std::map<const std::string, const int> & getGrades() const ;
+    const std::vector<std::unique_ptr<const Question>> &getQuestions() const;
+
 
     void toJSON(nlohmann::json & data) const;
 

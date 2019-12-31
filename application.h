@@ -13,6 +13,7 @@
 #include "loginwindow.h"
 #include "userwindow.h"
 #include "adminwindow.h"
+#include "mcqwidget.h"
 
 namespace QCMpp {
 
@@ -29,16 +30,25 @@ public slots:
     void signInSlot(const std::string & username, const std::string & password);
     void signUpSlot(const std::string & username, const std::string & password);
     void signOutSlot();
+
     void requestUsersSlot();
     void requestMCQsSlot();
     void requestRankChangeSlot(const std::string & username, bool isAdmin);
 
+    void cancelMCQSlot();
+
+    void takeMCQSlot(int mcq_id);
+
 signals:
     void onApplicationStart(bool first_start = false);
-    void onSignIn(User * const user);
+    void onSignIn(const User & user);
     void onSignOut();
+
     void onSendMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
     void onSendUsers(const std::map<std::string, std::unique_ptr<User>> & users);
+
+    void onTakeMCQ(const User & user, const MCQ & mcq);
+    void onCancelMCQ(const User & user);
 
 private:
     const std::string data_path;
@@ -49,11 +59,12 @@ private:
     LoginWindow loginWindow;
     UserWindow userWindow;
     AdminWindow adminWindow;
+    MCQWidget mcqWidget;
 
-    User* currentUser;
+    const User * currentUser;
     void addUser(const User & user);
     bool userExist(const User & user) const;
-    User* getUser(const User & user) const;
+    const User& getUser(const User & user) const;
 
     void signIn(const User & user);
     void signOut();
