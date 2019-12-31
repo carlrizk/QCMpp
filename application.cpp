@@ -106,11 +106,11 @@ void Application::undoConnections()
 
         disconnect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
         disconnect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
+        disconnect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
+
 
         disconnect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
         disconnect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
-
-        disconnect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
     }else{
         disconnect(&userWindow, &UserWindow::onSignOutSubmit, this, &Application::signOutSlot);
 
