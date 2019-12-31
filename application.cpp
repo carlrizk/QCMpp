@@ -20,7 +20,7 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
     connect(this, &Application::onSignIn, &loginWindow, &LoginWindow::hideWindow);
     connect(this, &Application::onSignOut, &loginWindow, &LoginWindow::show);
 
-    MCQ mcq("MCQ#1");
+    MCQ mcq("MCQ#1");                               //
     Question question("Question#1");
     question.addAnswer(Answer("Answer#1", true));
     question.addAnswer(Answer("Answer#2", false));
@@ -45,7 +45,7 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
     addMCQ(mcq);
 
     addUser(User("adm", "dgp", true));
-    addUser(User("stu","vwx"));
+    addUser(User("stu","vwx"));                     //
 
     emit onApplicationStart(users.size() == 0);
 }
@@ -132,7 +132,6 @@ void Application::undoConnections()
         disconnect(this, &Application::onFinishMCQ, &userWindow, &UserWindow::showWindow);
     }
 }
-
 
 void Application::signInSlot(const std::string &username, const std::string &password)
 {
