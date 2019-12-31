@@ -45,7 +45,7 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
 
     addMCQ(mcq);
 
-    addUser(User("adm", "adm", true));
+    addUser(User("adm", "dgp", true));
     addUser(User("stu","vwx"));
 
     emit onApplicationStart(users.size() == 0);
