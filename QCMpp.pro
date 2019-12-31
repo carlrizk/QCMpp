@@ -28,7 +28,6 @@ SOURCES += \
     mcqwindow.cpp \
     question.cpp \
     questionreadwidget.cpp \
-    questionwidget.cpp \
     user.cpp \
     userwindow.cpp
 
@@ -45,7 +44,6 @@ HEADERS += \
     mcqwindow.h \
     question.h \
     questionreadwidget.h \
-    questionwidget.h \
     user.h \
     userwindow.h
 
