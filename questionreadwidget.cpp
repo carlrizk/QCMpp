@@ -9,7 +9,7 @@ QuestionReadWidget::QuestionReadWidget(const Question & question, QWidget *paren
 {
     ui->setupUi(this);
 
-    ui->body->setTitle(QString::fromStdString(question.getText()));
+    ui->text->setText(QString::fromStdString(question.getText()));
     for(auto& answ : question.getAnswers()){
         AnswerReadWidget * answ_w = new AnswerReadWidget(*answ, this);
         answer_widgets.push_back(answ_w);

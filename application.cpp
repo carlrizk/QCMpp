@@ -28,7 +28,7 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
     question.addAnswer(Answer("Answer#4", false));
     mcq.addQuestion(question);
 
-    Question question2("Question#2");
+    Question question2("Question Question Question Question v Question Question Question QuestionQuestionQuestionQuestion QuestionQuestionQuestion QuestionQuestion Question QuestionQuestion Question Question Question Question Question Question Question#2");
     question2.addAnswer(Answer("Answer#1", true));
     question2.addAnswer(Answer("Answer#2", false));
     question2.addAnswer(Answer("Answer#3", false));
