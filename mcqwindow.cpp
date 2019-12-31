@@ -1,8 +1,9 @@
 #include "mcqwindow.h"
 #include "ui_mcqwindow.h"
 
-#include <QLayout>
 #include <vector>
+
+#include "mcqreadwidget.h"
 
 namespace QCMpp{
 
@@ -20,19 +21,14 @@ MCQWindow::~MCQWindow()
 
 void MCQWindow::showWindow(const User & user, MCQ & mcq)
 {
-    this->mcq = &mcq;
     this->user = &user;
+    this->mcq = &mcq;
+
     setWindowTitle(QString::fromStdString(mcq.getTitle()));
     ui->label_title->setText(QString::fromStdString(mcq.getTitle()));
 
-    QWidget * area = ui->scroll_area;
-    QLayout * layout = area->layout();
-
-    for(auto& quest : mcq.getQuestions()){
-        QuestionWidget * q_w = new QuestionWidget(*quest, area);
-        layout->addWidget(q_w);
-        question_widgets.push_back(q_w);
-    }
+    mcq_widget = new MCQReadWidget(mcq, this);
+    ui->body->addWidget(mcq_widget);
 
     show();
 }
@@ -45,18 +41,12 @@ void MCQWindow::hideWindow()
 
 void MCQWindow::reset()
 {
-    for(auto q_w : question_widgets){
-        delete q_w;
-    }
-    question_widgets.clear();
+    delete mcq_widget;
 }
 
 int MCQWindow::calculateGrade() const
 {
-    std::vector<std::vector<bool>> answers;
-    for(auto& quest : question_widgets){
-        answers.push_back(quest->correct());
-    }
+    std::vector<std::vector<bool>> answers = mcq_widget->correct();
     return mcq->correct(answers);
 }
 
