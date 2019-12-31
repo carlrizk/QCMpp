@@ -13,7 +13,7 @@
 #include "loginwindow.h"
 #include "userwindow.h"
 #include "adminwindow.h"
-#include "mcqwidget.h"
+#include "mcqwindow.h"
 
 namespace QCMpp {
 
@@ -38,6 +38,7 @@ public slots:
     void cancelMCQSlot();
 
     void takeMCQSlot(int mcq_id);
+    void finishMCQSlot();
 
 signals:
     void onApplicationStart(bool first_start = false);
@@ -47,8 +48,9 @@ signals:
     void onSendMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
     void onSendUsers(const std::map<std::string, std::unique_ptr<User>> & users);
 
-    void onTakeMCQ(const User & user, const MCQ & mcq);
+    void onTakeMCQ(const User & user, MCQ & mcq);
     void onCancelMCQ(const User & user);
+    void onFinishMCQ(const User & user);
 
 private:
     const std::string data_path;
@@ -59,7 +61,7 @@ private:
     LoginWindow loginWindow;
     UserWindow userWindow;
     AdminWindow adminWindow;
-    MCQWidget mcqWidget;
+    MCQWindow mcqWidget;
 
     const User * currentUser;
     void addUser(const User & user);

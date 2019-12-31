@@ -27,7 +27,7 @@ int MCQ::correct(const std::vector<std::vector<bool> > &u_Answers) const{
         if(questions[i]->isCorrect(u_Answers[i]))
             ++right_a;
     }
-    return right_a/n_questions;
+    return  right_a * 100/n_questions;
 }
 
 std::string MCQ::getTitle() const{
@@ -50,7 +50,7 @@ const std::map<const std::string, const int> & MCQ::getGrades() const{
     return grades;
 }
 
-const std::vector<std::unique_ptr<const Question> > &MCQ::getQuestions() const
+const std::vector<std::unique_ptr<const Question> > & MCQ::getQuestions() const
 {
     return questions;
 }
