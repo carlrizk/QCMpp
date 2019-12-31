@@ -132,6 +132,10 @@ void Application::undoConnections()
         disconnect(&mcqWidget, &MCQWindow::onCancelSubmit, this, &Application::cancelMCQSlot);
         disconnect(this, &Application::onCancelMCQ, &mcqWidget, &MCQWindow::hideWindow);
         disconnect(this, &Application::onCancelMCQ, &userWindow, &UserWindow::showWindow);
+
+        disconnect(&mcqWidget, &MCQWindow::onFinishMCQSubmit, this, &Application::finishMCQSlot);
+        disconnect(this, &Application::onFinishMCQ, &mcqWidget, &MCQWindow::hideWindow);
+        disconnect(this, &Application::onFinishMCQ, &userWindow, &UserWindow::showWindow);
     }
 }
 
