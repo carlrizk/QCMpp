@@ -36,9 +36,12 @@ public slots:
     void requestRankChangeSlot(const std::string & username, bool isAdmin);
 
     void cancelMCQSlot();
-
     void takeMCQSlot(int mcq_id);
     void finishMCQSlot();
+
+    void createMCQSlot();
+    void cancelCreateMCQSlot();
+    void finishCreateMCQSlot(const MCQ & mcq);
 
 signals:
     void onApplicationStart(bool first_start = false);
@@ -51,6 +54,10 @@ signals:
     void onTakeMCQ(const User & user, MCQ & mcq);
     void onCancelMCQ(const User & user);
     void onFinishMCQ(const User & user);
+
+    void onCreateMCQ();
+    void onCancelCreateMCQ();
+    void onFinishCreateMCQ();
 
 private:
     const std::string data_path;
