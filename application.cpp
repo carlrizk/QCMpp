@@ -10,7 +10,7 @@ namespace QCMpp {
 
 Application::Application(const std::string &data_path): data_path(data_path), currentUser(nullptr)
 {
-    //LoadData();
+    //LoadData();                   //
 
     connect(this, &Application::onApplicationStart, &loginWindow, &LoginWindow::showWindow);
 
@@ -52,7 +52,7 @@ Application::Application(const std::string &data_path): data_path(data_path), cu
 
 Application::~Application()
 {
-    //SaveData();
+    //SaveData();                                       //
 }
 
 void Application::doConnections()
