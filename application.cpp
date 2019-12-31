@@ -4,7 +4,6 @@
 #include "json.hpp"
 #include "encrypter.h"
 
-#include <iostream>
 #include <mcq.h>
 
 namespace QCMpp {
@@ -107,7 +106,6 @@ void Application::undoConnections()
         disconnect(&adminWindow, &AdminWindow::onRequestMCQs, this, &Application::requestMCQsSlot);
         disconnect(&adminWindow, &AdminWindow::onRequestUsers, this, &Application::requestUsersSlot);
         disconnect(&adminWindow, &AdminWindow::onRequestChangeRank, this, &Application::requestRankChangeSlot);
-
 
         disconnect(this, &Application::onSendMCQs, &adminWindow, &AdminWindow::updateMCQs);
         disconnect(this, &Application::onSendUsers, &adminWindow, &AdminWindow::updateUsers);
