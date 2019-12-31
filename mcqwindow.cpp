@@ -55,10 +55,10 @@ void MCQWindow::on_button_cancel_clicked()
     emit onCancelSubmit();
 }
 
-}
-
-void QCMpp::MCQWindow::on_button_submit_clicked()
+void MCQWindow::on_button_submit_clicked()
 {
     mcq->addGrade(user->getUsername(), calculateGrade());
     emit onFinishMCQSubmit();
+}
+
 }
