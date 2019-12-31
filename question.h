@@ -17,7 +17,10 @@ public:
 
     void addAnswer(const Answer & a);
 
+    const std::vector<std::unique_ptr<const Answer>> & getAnswers()const;
+
     bool isCorrect(const std::vector<bool> & u_Answers) const;
+    std::string getText() const;
 
     void toJSON(nlohmann::json & data) const;
 

@@ -26,7 +26,7 @@ public slots:
 
     void updateUsers(const std::map<std::string, std::unique_ptr<User> >& users);
 
-    void showWindow(User * const user);
+    void showWindow(const User & user);
 
     void hideWindow();
 
@@ -60,7 +60,7 @@ private slots:
 private:
     Ui::AdminWindow *ui;
 
-    User* currentUser;
+    const User* user;
 
     bool requestUsers;
 

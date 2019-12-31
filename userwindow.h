@@ -26,7 +26,7 @@ signals:
     void onRequestMCQs();
 
 public slots:
-    void showWindow(User * const user);
+    void showWindow(const User & user);
     void hideWindow();
     void updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs);
 
@@ -39,7 +39,7 @@ private slots:
 private:
     Ui::UserWindow *ui;
 
-    User* currentUser;
+    const User * user;
     void reset();
     void setTableCell(int row, int column, const std::string & string,  QTableWidget & table);
 };

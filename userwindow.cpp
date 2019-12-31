@@ -7,7 +7,7 @@ namespace QCMpp {
 
 UserWindow::UserWindow(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::UserWindow), currentUser(nullptr)
+    ui(new Ui::UserWindow)
 {
     ui->setupUi(this);
 
@@ -23,11 +23,11 @@ UserWindow::~UserWindow()
     delete ui;
 }
 
-void UserWindow::showWindow(User * const user)
+void UserWindow::showWindow(const User & user)
 {
-    currentUser = user;
-    setWindowTitle(QString::fromStdString("Logged In as " + currentUser->getUsername() + " (Student)"));
-    this->ui->label_username->setText(QString::fromStdString(currentUser->getUsername()));
+    this->user = &user;
+    setWindowTitle(QString::fromStdString("Logged In as " + user.getUsername() + " (Student)"));
+    this->ui->label_username->setText(QString::fromStdString(user.getUsername()));
     emit onRequestMCQs();
     show();
 }
@@ -44,14 +44,14 @@ void UserWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ> > &mcqs)
     ui->table_mcqs->setRowCount(mcqs.size());
     for(size_t i = 0; i < mcqs.size(); ++i){
         setTableCell(i, 0 , mcqs[i]->getTitle(), *ui->table_mcqs);
-        bool hasGrade = mcqs[i]->hasGrade(currentUser->getUsername());
-        setTableCell(i, 1 , (hasGrade) ? std::to_string(mcqs[i]->getGrade(currentUser->getUsername())) : "", *ui->table_mcqs);
+        bool hasGrade = mcqs[i]->hasGrade(user->getUsername());
+        setTableCell(i, 1 , (hasGrade) ? std::to_string(mcqs[i]->getGrade(user->getUsername())) : "", *ui->table_mcqs);
     }
 }
 
 void UserWindow::reset()
 {
-    currentUser = nullptr;
+    user = nullptr;
     ui->label_username->clear();
     ui->table_mcqs->clearContents();
     ui->button_take->setEnabled(false);

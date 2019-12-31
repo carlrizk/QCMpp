@@ -17,7 +17,7 @@ public:
     void setAdmin(bool admin);
 
     std::string getUsername() const;
-    bool matchPassword(const std::string & pass);
+    bool matchPassword(const std::string & pass)const ;
 
     void toJSON(nlohmann::json & data) const;
 
