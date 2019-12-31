@@ -36,7 +36,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTableWidget" name="table">
+  <widget class="QTableWidget" name="table_mcqs">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -138,6 +138,44 @@
    <property name="text">
     <string>MCQs</string>
    </property>
+  </widget>
+  <widget class="QTableWidget" name="table_users">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>90</y>
+     <width>201</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="dragEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="sortingEnabled">
+    <bool>false</bool>
+   </property>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
+   <column>
+    <property name="text">
+     <string>User</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Rank</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>
