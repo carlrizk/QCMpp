@@ -18,14 +18,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     adminwindow.cpp \
     answer.cpp \
-    answerwidget.cpp \
+    answerreadwidget.cpp \
     application.cpp \
     encrypter.cpp \
     loginwindow.cpp \
     main.cpp \
     mcq.cpp \
+    mcqreadwidget.cpp \
     mcqwindow.cpp \
     question.cpp \
+    questionreadwidget.cpp \
     questionwidget.cpp \
     user.cpp \
     userwindow.cpp
@@ -33,14 +35,16 @@ SOURCES += \
 HEADERS += \
     adminwindow.h \
     answer.h \
-    answerwidget.h \
+    answerreadwidget.h \
     application.h \
     encrypter.h \
     json.hpp \
     loginwindow.h \
     mcq.h \
+    mcqreadwidget.h \
     mcqwindow.h \
     question.h \
+    questionreadwidget.h \
     questionwidget.h \
     user.h \
     userwindow.h
@@ -48,8 +52,11 @@ HEADERS += \
 
 FORMS += \
     adminwindow.ui \
+    answerreadwidget.ui \
     loginwindow.ui \
+    mcqreadwidget.ui \
     mcqwindow.ui \
+    questionreadwidget.ui \
     userwindow.ui
 
 

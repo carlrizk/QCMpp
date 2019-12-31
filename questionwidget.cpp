@@ -16,7 +16,7 @@ QuestionWidget::QuestionWidget(const Question & question, QWidget *parent) :
     layout->addWidget(label_question);
 
     for(auto& ans : question.getAnswers()){
-        AnswerWidget * a_w = new AnswerWidget(*ans, this);
+        AnswerReadWidget * a_w = new AnswerReadWidget(*ans, this);
         layout->addWidget(a_w);
         answer_widgets.push_back(a_w);
     }
@@ -27,7 +27,7 @@ std::vector<bool> QuestionWidget::correct() const
 {
     std::vector<bool> answers;
     for(auto& answ : answer_widgets){
-        answers.push_back(answ->correct());
+        answers.push_back(answ->isChecked());
     }
     return answers;
 };

@@ -5,7 +5,8 @@
 #include <vector>
 
 #include "question.h"
-#include "answerwidget.h"
+
+#include "answerreadwidget.h"
 
 namespace QCMpp{
 
@@ -18,7 +19,7 @@ public:
     std::vector<bool> correct() const;
 
 private:
-    std::vector<AnswerWidget *> answer_widgets;
+    std::vector<AnswerReadWidget *> answer_widgets;
 
 };
 

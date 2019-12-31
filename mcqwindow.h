@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <vector>
 
-#include "questionwidget.h"
+#include "mcqreadwidget.h"
 #include "mcq.h"
 
 namespace Ui {
@@ -36,11 +36,10 @@ private slots:
 
 private:
     Ui::MCQWindow *ui;
-
-    MCQ * mcq;
     const User * user;
+    MCQ * mcq;
 
-    std::vector<QuestionWidget *> question_widgets;
+    MCQReadWidget * mcq_widget;
 
     void reset();
     int calculateGrade() const;
