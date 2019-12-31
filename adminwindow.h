@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <string>
+#include <QTableWidget>
 
 #include "mcq.h"
 
@@ -55,7 +56,8 @@ private slots:
 
     void on_button_tomcqs_clicked();
 
-    void on_table_itemSelectionChanged();
+    void on_table_users_itemSelectionChanged();
+
 
 private:
     Ui::AdminWindow *ui;
@@ -68,7 +70,7 @@ private:
 
     const std::vector<std::unique_ptr<MCQ>> * mcqs;
 
-    void setTableCell(const int row, const int column, const std::string & string);
+    void setTableCell(QTableWidget* table,const int row, const int column, const std::string & string);
 
 };
 
