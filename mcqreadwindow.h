@@ -1,5 +1,5 @@
-#ifndef MCQWIDGET_H
-#define MCQWIDGET_H
+#ifndef MCQREADWINDOW_H
+#define MCQREADWINDOW_H
 
 #include <QWidget>
 #include <vector>
@@ -8,18 +8,18 @@
 #include "mcq.h"
 
 namespace Ui {
-class MCQWindow;
+class MCQReadWindow;
 }
 
 namespace QCMpp {
 
-class MCQWindow : public QWidget
+class MCQReadWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MCQWindow(QWidget *parent = nullptr);
-    ~MCQWindow();
+    explicit MCQReadWindow(QWidget *parent = nullptr);
+    ~MCQReadWindow();
 
 signals:
     void onCancelSubmit();
@@ -35,7 +35,7 @@ private slots:
     void on_button_submit_clicked();
 
 private:
-    Ui::MCQWindow *ui;
+    Ui::MCQReadWindow *ui;
     const User * user;
     MCQ * mcq;
 
@@ -47,4 +47,4 @@ private:
 
 }
 
-#endif // MCQWIDGET_H
+#endif // MCQREADWINDOW_H

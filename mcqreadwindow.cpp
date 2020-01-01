@@ -1,5 +1,5 @@
-#include "mcqwindow.h"
-#include "ui_mcqwindow.h"
+#include "mcqreadwindow.h"
+#include "ui_mcqreadwindow.h"
 
 #include <vector>
 
@@ -7,19 +7,19 @@
 
 namespace QCMpp{
 
-MCQWindow::MCQWindow(QWidget *parent):
+MCQReadWindow::MCQReadWindow(QWidget *parent):
     QWidget(parent),
-    ui(new Ui::MCQWindow)
+    ui(new Ui::MCQReadWindow)
 {
     ui->setupUi(this);
 }
 
-MCQWindow::~MCQWindow()
+MCQReadWindow::~MCQReadWindow()
 {
     delete ui;
 }
 
-void MCQWindow::showWindow(const User & user, MCQ & mcq)
+void MCQReadWindow::showWindow(const User & user, MCQ & mcq)
 {
     this->user = &user;
     this->mcq = &mcq;
@@ -33,29 +33,29 @@ void MCQWindow::showWindow(const User & user, MCQ & mcq)
     show();
 }
 
-void MCQWindow::hideWindow()
+void MCQReadWindow::hideWindow()
 {
     reset();
     hide();
 }
 
-void MCQWindow::reset()
+void MCQReadWindow::reset()
 {
     delete mcq_widget;
 }
 
-int MCQWindow::calculateGrade() const
+int MCQReadWindow::calculateGrade() const
 {
     std::vector<std::vector<bool>> answers = mcq_widget->correct();
     return mcq->correct(answers);
 }
 
-void MCQWindow::on_button_cancel_clicked()
+void MCQReadWindow::on_button_cancel_clicked()
 {
     emit onCancelSubmit();
 }
 
-void MCQWindow::on_button_submit_clicked()
+void MCQReadWindow::on_button_submit_clicked()
 {
     mcq->addGrade(user->getUsername(), calculateGrade());
     emit onFinishMCQSubmit();
