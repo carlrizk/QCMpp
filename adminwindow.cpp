@@ -31,7 +31,7 @@ void AdminWindow::updateMCQs(const std::vector<std::unique_ptr<MCQ>> & mcqs){
 
 void AdminWindow::on_button_createmcq_clicked()
 {
-    emit onCreateMCQ();
+    emit onCreateMCQSubmit();
 }
 
 void AdminWindow::on_combobox_mcqs_currentIndexChanged(int index)

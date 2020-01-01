@@ -19,6 +19,7 @@ SOURCES += \
     adminwindow.cpp \
     answer.cpp \
     answerreadwidget.cpp \
+    answerwritewidget.cpp \
     application.cpp \
     encrypter.cpp \
     loginwindow.cpp \
@@ -26,9 +27,11 @@ SOURCES += \
     mcq.cpp \
     mcqreadwidget.cpp \
     mcqreadwindow.cpp \
+    mcqwritewidget.cpp \
     mcqwritewindow.cpp \
     question.cpp \
     questionreadwidget.cpp \
+    questionwritewidget.cpp \
     user.cpp \
     userwindow.cpp
 
@@ -36,6 +39,7 @@ HEADERS += \
     adminwindow.h \
     answer.h \
     answerreadwidget.h \
+    answerwritewidget.h \
     application.h \
     encrypter.h \
     json.hpp \
@@ -43,9 +47,11 @@ HEADERS += \
     mcq.h \
     mcqreadwidget.h \
     mcqreadwindow.h \
+    mcqwritewidget.h \
     mcqwritewindow.h \
     question.h \
     questionreadwidget.h \
+    questionwritewidget.h \
     user.h \
     userwindow.h
 
@@ -53,11 +59,14 @@ HEADERS += \
 FORMS += \
     adminwindow.ui \
     answerreadwidget.ui \
+    answerwritewidget.ui \
     loginwindow.ui \
     mcqreadwidget.ui \
     mcqreadwindow.ui \
+    mcqwritewidget.ui \
     mcqwritewindow.ui \
     questionreadwidget.ui \
+    questionwritewidget.ui \
     userwindow.ui
 
 

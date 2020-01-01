@@ -40,7 +40,7 @@ signals:
 
     void onSignOutSubmit();
 
-    void onCreateMCQ();
+    void onCreateMCQSubmit();
 
 
 private slots:

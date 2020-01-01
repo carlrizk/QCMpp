@@ -14,6 +14,7 @@
 #include "userwindow.h"
 #include "adminwindow.h"
 #include "mcqreadwindow.h"
+#include "mcqwritewindow.h"
 
 namespace QCMpp {
 
@@ -39,9 +40,9 @@ public slots:
     void takeMCQSlot(int mcq_id);
     void finishMCQSlot();
 
-//    void createMCQSlot();
-//    void cancelCreateMCQSlot();
-//    void finishCreateMCQSlot(const MCQ & mcq);
+    void createMCQSlot();
+    void cancelCreateMCQSlot();
+    void finishCreateMCQSlot(const MCQ & mcq);
 
 signals:
     void onApplicationStart(bool first_start = false);
@@ -55,9 +56,9 @@ signals:
     void onCancelMCQ(const User & user);
     void onFinishMCQ(const User & user);
 
-    void onCreateMCQ();
-    void onCancelCreateMCQ();
-    void onFinishCreateMCQ();
+    void onCreateMCQ(const User & user);
+    void onCancelCreateMCQ(const User & user);
+    void onFinishCreateMCQ(const User & user);
 
 private:
     const std::string data_path;
@@ -68,7 +69,8 @@ private:
     LoginWindow loginWindow;
     UserWindow userWindow;
     AdminWindow adminWindow;
-    MCQReadWindow mcqWidget;
+    MCQReadWindow mcqReadWindow;
+    MCQWriteWindow mcqWriteWindow;
 
     const User * currentUser;
     void addUser(const User & user);
