@@ -25,7 +25,8 @@ SOURCES += \
     main.cpp \
     mcq.cpp \
     mcqreadwidget.cpp \
-    mcqwindow.cpp \
+    mcqreadwindow.cpp \
+    mcqwritewindow.cpp \
     question.cpp \
     questionreadwidget.cpp \
     user.cpp \
@@ -41,7 +42,8 @@ HEADERS += \
     loginwindow.h \
     mcq.h \
     mcqreadwidget.h \
-    mcqwindow.h \
+    mcqreadwindow.h \
+    mcqwritewindow.h \
     question.h \
     questionreadwidget.h \
     user.h \
@@ -53,7 +55,8 @@ FORMS += \
     answerreadwidget.ui \
     loginwindow.ui \
     mcqreadwidget.ui \
-    mcqwindow.ui \
+    mcqreadwindow.ui \
+    mcqwritewindow.ui \
     questionreadwidget.ui \
     userwindow.ui
 
