@@ -82,15 +82,15 @@ void Application::doConnections()
         connect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
 
         connect(&userWindow, &UserWindow::onTakeMCQSubmit, this, &Application::takeMCQSlot);
-        connect(this, &Application::onTakeMCQ, &mcqWidget, &MCQWindow::showWindow);
+        connect(this, &Application::onTakeMCQ, &mcqReadWindow, &MCQReadWindow::showWindow);
         connect(this, &Application::onTakeMCQ, &userWindow, &UserWindow::hideWindow);
 
-        connect(&mcqWidget, &MCQWindow::onCancelSubmit, this, &Application::cancelMCQSlot);
-        connect(this, &Application::onCancelMCQ, &mcqWidget, &MCQWindow::hideWindow);
+        connect(&mcqReadWindow, &MCQReadWindow::onCancelSubmit, this, &Application::cancelMCQSlot);
+        connect(this, &Application::onCancelMCQ, &mcqReadWindow, &MCQReadWindow::hideWindow);
         connect(this, &Application::onCancelMCQ, &userWindow, &UserWindow::showWindow);
 
-        connect(&mcqWidget, &MCQWindow::onFinishMCQSubmit, this, &Application::finishMCQSlot);
-        connect(this, &Application::onFinishMCQ, &mcqWidget, &MCQWindow::hideWindow);
+        connect(&mcqReadWindow, &MCQReadWindow::onFinishMCQSubmit, this, &Application::finishMCQSlot);
+        connect(this, &Application::onFinishMCQ, &mcqReadWindow, &MCQReadWindow::hideWindow);
         connect(this, &Application::onFinishMCQ, &userWindow, &UserWindow::showWindow);
     }
 }
@@ -120,15 +120,15 @@ void Application::undoConnections()
         disconnect(this, &Application::onSendMCQs, &userWindow, &UserWindow::updateMCQs);
 
         disconnect(&userWindow, &UserWindow::onTakeMCQSubmit, this, &Application::takeMCQSlot);
-        disconnect(this, &Application::onTakeMCQ, &mcqWidget, &MCQWindow::showWindow);
+        disconnect(this, &Application::onTakeMCQ, &mcqReadWindow, &MCQReadWindow::showWindow);
         disconnect(this, &Application::onTakeMCQ, &userWindow, &UserWindow::hideWindow);
 
-        disconnect(&mcqWidget, &MCQWindow::onCancelSubmit, this, &Application::cancelMCQSlot);
-        disconnect(this, &Application::onCancelMCQ, &mcqWidget, &MCQWindow::hideWindow);
+        disconnect(&mcqReadWindow, &MCQReadWindow::onCancelSubmit, this, &Application::cancelMCQSlot);
+        disconnect(this, &Application::onCancelMCQ, &mcqReadWindow, &MCQReadWindow::hideWindow);
         disconnect(this, &Application::onCancelMCQ, &userWindow, &UserWindow::showWindow);
 
-        disconnect(&mcqWidget, &MCQWindow::onFinishMCQSubmit, this, &Application::finishMCQSlot);
-        disconnect(this, &Application::onFinishMCQ, &mcqWidget, &MCQWindow::hideWindow);
+        disconnect(&mcqReadWindow, &MCQReadWindow::onFinishMCQSubmit, this, &Application::finishMCQSlot);
+        disconnect(this, &Application::onFinishMCQ, &mcqReadWindow, &MCQReadWindow::hideWindow);
         disconnect(this, &Application::onFinishMCQ, &userWindow, &UserWindow::showWindow);
     }
 }
