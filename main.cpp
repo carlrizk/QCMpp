@@ -1,3 +1,7 @@
+// Carl Rizk 180898
+// Rima Al Ghossein
+// Anthony Jeitany
+
 #include <QApplication>
 #include "adminwindow.h"
 
