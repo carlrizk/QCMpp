@@ -2,7 +2,6 @@
 // Rima Al Ghossein 180105
 
 #include <QApplication>
-#include "adminwindow.h"
 
 #include "application.h"
 
