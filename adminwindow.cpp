@@ -14,6 +14,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->button_changerank->hide();
     ui->table_users->hide();
+    ui->button_tomcqs->hide();
 }
 
 AdminWindow::~AdminWindow()
@@ -70,6 +71,8 @@ void AdminWindow::on_button_users_clicked()
     ui->table_mcqs->hide();
     ui->button_tomcqs->show();
     ui->table_users->show();
+    ui->button_changerank->show();
+    ui->button_changerank->setEnabled(false);
 }
 
 void AdminWindow::updateUsers(const std::map<std::string, std::unique_ptr<User>> & users)
