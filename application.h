@@ -39,9 +39,9 @@ public slots:
     void takeMCQSlot(int mcq_id);
     void finishMCQSlot();
 
-    void createMCQSlot();
-    void cancelCreateMCQSlot();
-    void finishCreateMCQSlot(const MCQ & mcq);
+//    void createMCQSlot();
+//    void cancelCreateMCQSlot();
+//    void finishCreateMCQSlot(const MCQ & mcq);
 
 signals:
     void onApplicationStart(bool first_start = false);
