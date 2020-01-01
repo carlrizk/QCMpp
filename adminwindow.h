@@ -63,14 +63,11 @@ private:
     Ui::AdminWindow *ui;
 
     const User* user;
-
-    bool requestUsers;
-
-    void insert_grades(const std::map<const std::string, const int> & u_g);
-
     const std::vector<std::unique_ptr<MCQ>> * mcqs;
 
+    void insert_grades(const std::map<const std::string, const int> & u_g);
     void setTableCell(QTableWidget* table,const int row, const int column, const std::string & string);
+    void reset();
 
 };
 
