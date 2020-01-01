@@ -11,10 +11,6 @@ UserWindow::UserWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QStringList horzHeaders;
-    horzHeaders << "MCQ" << "Grade";
-    ui->table_mcqs->setHorizontalHeaderLabels(horzHeaders);
-
     reset();
 }
 
